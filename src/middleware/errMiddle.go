@@ -1,0 +1,83 @@
+package middleware
+
+import (
+	"fmt"
+	"github.com/gin-gonic/gin"
+	"net/http"
+	"runtime/debug"
+	"ry_go/src/dto/comDto"
+)
+
+/*
+* @MethodName
+* @Description 全局异常捕捉
+* @Author khr
+* @Date 2023/7/31 15:21
+ */
+
+func GlobalErrorMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		defer func() {
+			fmt.Println("程序捕捉错误")
+			if r := recover(); r != nil {
+				fmt.Println("打印错误信息:", r)
+				// 打印错误堆栈信息
+				debug.PrintStack()
+				err := c.Errors.Last()
+				errorMessage := err.Err.Error()
+				c.JSON(http.StatusInternalServerError, &comDto.ResponseData{
+					Code:    int(err.Type),
+					Message: errorMessage,
+					Data:    nil,
+				})
+				return
+				c.Abort()
+			}
+		}()
+
+		c.Next()
+	}
+}
+
+/*
+* @MethodName UnifiedResponseMiddleware
+* @Description 统一返回正确和错误格式
+* @Author khr
+* @Date 2023/7/29 9:45
+ */
+
+func UnifiedResponseMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+
+		fmt.Println("1")
+		c.Next()
+		fmt.Println("2")
+		if len(c.Errors) > 0 {
+			fmt.Println("出现错误", c.Errors)
+			err := c.Errors.Last()
+			//fmt.Println(err.Type, "定位最新的错误地址")
+			errorMessage := err.Err.Error()
+			//fmt.Println(c.Writer.Status(), "错误类型")
+			c.JSON(http.StatusOK, &comDto.ResponseData{
+				Code:    c.Writer.Status() | 460,
+				Message: errorMessage,
+				Data:    "",
+			})
+			return
+
+		}
+		fmt.Println("格式化返回")
+		if c.Writer.Status() == http.StatusOK {
+			data, exists := c.Get("res")
+			if exists {
+				c.JSON(http.StatusOK, &comDto.ResponseData{
+					Code:    http.StatusOK,
+					Message: "success",
+					Data:    data,
+				})
+				return
+			}
+		}
+
+	}
+}
