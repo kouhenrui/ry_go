@@ -1,5 +1,7 @@
 package comDto
 
+import "ry_go/src/pojo"
+
 /**
  * @ClassName common
  * @Description TODO
@@ -9,12 +11,10 @@ package comDto
  */
 
 type TokenClaims struct {
-	Id       uint   `json:"id"`
-	Phone    string `json:"phone"`
-	Name     string `json:"name"`
-	Role     int    `json:"role"`
-	Account  string `json:"account"`
-	RoleName string `json:"role_name"`
+	Id       uint        `json:"id"`
+	Phone    string      `json:"phone"`
+	NickName string      `json:"nick_name"`
+	Role     []pojo.Role `json:"role"`
 }
 type ResponseData struct {
 	Code    int         `json:"code"`

@@ -2,9 +2,9 @@ package util
 
 import (
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"github.com/go-pay/gopay/pkg/jwt"
 	"ry_go/src/dto/comDto"
+	"ry_go/src/dto/resDto"
 	"ry_go/src/global"
 	"time"
 )
@@ -26,7 +26,7 @@ type AllClaims struct {
 }
 
 // 颁发token admin
-func SignToken(infoClaims comDto.TokenClaims, day time.Duration) (string, string) {
+func SignToken(infoClaims comDto.TokenClaims, day time.Duration) (t resDto.TokenAndExp) {
 	expireTime := time.Now().Add(day) //7天过期时间
 	claims := &AllClaims{
 		User: infoClaims,
@@ -44,18 +44,20 @@ func SignToken(infoClaims comDto.TokenClaims, day time.Duration) (string, string
 		fmt.Println(err, "生成token错误")
 	}
 	tFStr := expireTime.Format("2006-01-02 15:04:05")
-	return tokenString, tFStr
+	t.Token = tokenString
+	t.Exptime = tFStr
+	return t
 }
 
-// 验证token
-func AnalysyToken(c *gin.Context) bool {
-	//fmt.Println("进入token验证")
-	tokenString := c.GetHeader("Authorization")
-	if tokenString == "" {
-		return false
-	}
-	return true
-}
+//// 验证token
+//func AnalysyToken(c *gin.Context) bool {
+//	//fmt.Println("进入token验证")
+//	tokenString := c.GetHeader("Authorization")
+//	if tokenString == "" {
+//		return false
+//	}
+//	return true
+//}
 
 // 解析Token
 func ParseToken(tokenString string) comDto.TokenClaims {

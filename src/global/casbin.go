@@ -3,7 +3,7 @@ package global
 import (
 	"fmt"
 	"github.com/casbin/casbin/v2"
-	_ "github.com/casbin/casbin/v2"
+	//_ "github.com/casbin/casbin/v2"
 	"github.com/casbin/casbin/v2/util"
 	gormadapter "github.com/casbin/gorm-adapter/v2"
 	"log"
@@ -54,24 +54,29 @@ func KeyMatch(key1, key2 string) bool {
 
 var CasbinDb *casbin.Enforcer
 
-func CasbinInit() {
-	var err error
-	//fmt.Printf("打印权限", casbinCon)
+func CabinInit() {
+	log.Printf("权限初始化")
 	db := CabinConfig.UserName + ":" + CabinConfig.PassWord + "@tcp(" + CabinConfig.HOST + ":" + CabinConfig.Port + ")/"
 	//db加库名可以指定使用表或者自动创建表
+	log.Println(db, "连接参数")
+
+	//"mysql_username:mysql_password@tcp(127.0.0.1:3306)/"
 	//a, aerr := gormadapter.NewAdapter(CasbinConfig.Type, db,true)//自己创建表
-	a, aerr := gormadapter.NewAdapter(CabinConfig.Type, db)
-	CasbinDb, err = casbin.NewEnforcer("auth_model.conf", a)
-	//fmt.Println("e", e)
+	adapter, aerr := gormadapter.NewAdapter("mysql", db)
+	log.Print(adapter)
 	if aerr != nil {
-		fmt.Printf("权限表为创建，错误原因：%s", aerr)
+		log.Printf("连接数据库错误：%s", adapter)
+		//panic(aerr)
 	}
+	log.Print("问题定位到")
+	CasbinDb, err = casbin.NewEnforcer(CabinModel, adapter)
 	if err != nil {
 		fmt.Println("加载模型出现错误", err)
+		//panic(err)
 	}
-	log.Printf("权限初始化成功")
+	log.Print("权限初始化成功")
 	//使用模糊匹配路径
-	CasbinDb.AddFunction("regexMatch", RegexMatchFunc)
+	//CasbinDb.AddFunction("regexMatch", RegexMatchFunc)
 	//创建表
 
 	//e.AddFunction("my_func", KeyMatchFunc)
@@ -79,7 +84,7 @@ func CasbinInit() {
 	//check(e, "lili", "dev", "data2", "read")
 	//check(e, "dajun", "tenant1", "data1", "read")
 	//check(e, "dajun", "tenant2", "data2", "read")
-	check("superadmin", "", "")
+	//check("superadmin", "", "")
 }
 
 // 正则匹配函数

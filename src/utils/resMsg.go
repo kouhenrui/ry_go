@@ -2,8 +2,8 @@ package util
 
 const (
 	//权限错误
-	NO_AUTH_ERROR = "请登录"
-
+	NO_AUTH_ERROR                    = "请登录"
+	ACCOUNT_PWD_ERROR                = "账号密码错误"
 	SUCCESS                          = "成功"
 	MODIFICATION_SUCCESSE            = "修改成功"
 	ADD_SUCCESS                      = "增加成功"

@@ -31,7 +31,7 @@ func Redisinit() {
 		log.Fatalf("redis connect get failed.%v", err.Error())
 		return
 	}
-	fmt.Printf("redis 初始化连接成功")
+	//fmt.Printf("redis 初始化连接成功")
 	log.Printf("redis 初始化连接成功")
 }
 

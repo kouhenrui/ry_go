@@ -105,6 +105,9 @@ func LoggerMiddleWare() gin.HandlerFunc {
 		clientIP := c.ClientIP()
 		method := c.Request.Method
 		url := c.Request.RequestURI
+		if util.ExistIn(url, global.WriteList) {
+			rbody = "uploads"
+		}
 		Log := global.Logger.WithFields(
 			logrus.Fields{
 				"SpendTime": spendTime,       //接口花费时间
@@ -142,13 +145,15 @@ func GolbalMiddleWare() gin.HandlerFunc {
 		//路径模糊匹配
 		if !util.FuzzyMatch(requestUrl, global.WriteList) {
 			//请求头是否携带token
-			judge := util.AnalysyToken(c)
-			if !judge {
+			existToken := c.GetHeader("Authorization")
+			//判断token是否存在
+			if len(existToken) < 0 || existToken == "" {
 				c.AbortWithStatusJSON(http.StatusUnauthorized, util.NO_AUTHORIZATION)
 				return
 			}
+
 			claims = util.ParseToken(c.GetHeader("Authorization"))
-			c.Set("role_name", claims)
+			c.Set("role", claims.Role)
 		}
 		c.Next()
 		//ts := time.Since(t)

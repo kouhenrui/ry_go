@@ -35,6 +35,8 @@ func Dbinit() {
 	sqlDB.SetConnMaxIdleTime(30 * time.Minute) //设置30秒重连
 
 	log.Printf("mysql初始化连接成功")
+
+	//fmt.Printf("mysql 初始化连接成功")
 	//自动生成表
 	//Db.AutoMigrate()
 	//pojo.AutoMigrateinit()

@@ -9,32 +9,27 @@ import (
 	"github.com/spf13/viper"
 	clientv3 "go.etcd.io/etcd/client/v3"
 	"gorm.io/gorm"
+	"io/ioutil"
 	"log"
+	"os"
 	"ry_go/src/global/conf"
 	"time"
-)
-
-/**
+) /**
  * @ClassName index
  * @Description TODO
  * @Author khr
  * @Date 2023/7/29 14:36
  * @Version 1.0
- */
-var (
-	v      *viper.Viper
-	err    error
-	day    = time.Hour * 24
-	hour   = time.Hour
-	minute = time.Minute
-	ctx    = context.Background()
-)
-
-var (
-	Captcha     string //redis缓存验证码前缀
-	Port        string //程序使用端口
-	HttpVersion bool   //版本控制
-
+ */var (
+	v               *viper.Viper
+	err             error
+	day             = time.Hour * 24
+	hour            = time.Hour
+	minute          = time.Minute
+	ctx             = context.Background()
+	Captcha         string //redis缓存验证码前缀
+	Port            string //程序使用端口
+	HttpVersion     bool   //版本控制
 	InterceptPrefix string
 	CaptchaExp      time.Duration
 	RedisClient     *redis.Client
@@ -43,9 +38,15 @@ var (
 	JWTKEY          = "12"
 	LANGUAGE        = "zh"
 	IpAccess        = []string{"127.0.0.1"}
-	WriteList       = []string{}
+	WriteList       = []string{"/api/upload/file", "/api/captcha"}
 	EtcdArry        = []string{"192.168.245.22:2379"}
+	FilePath        string        //静态文件上传路径
+	VideoPath       string        //视频上传路径
+	AdminExp        time.Duration //管理员登陆时长
+	UserExp         time.Duration //用户登录时长
+	CabinModel      = "auth_model.conf"
 )
+
 var (
 	MysqlConfig    conf.MysqlConf    //连接mysql实例化参数
 	RedisConfig    conf.RedisConf    //连接redis实例化参数
@@ -75,8 +76,19 @@ func init() {
 		fmt.Println("Config file updated.")
 		viperLoadConf() // 加载配置的方法
 	})
+	txtCon, _ := ioutil.ReadFile("banner.txt")
+	fmt.Println(string(txtCon))
 
 	viperLoadConf()
+
+	if err = os.MkdirAll(FilePath, os.ModePerm); err != nil {
+		fmt.Println("无法创建上传文件目录:", err)
+
+	}
+	if err = os.MkdirAll(VideoPath, os.ModePerm); err != nil {
+		fmt.Println("无法创建上传视频目录:", err)
+
+	}
 
 }
 func viperLoadConf() {
@@ -89,21 +101,27 @@ func viperLoadConf() {
 	CaptchaExp = time.Duration(v.GetInt("CaptchaExp")) * minute
 	//日志路径及名称设置
 	logConfig := v.GetStringMap("log")
+	FilePath = v.GetString("FilePath")
+	VideoPath = v.GetString("VideoPath")
 
+	//登陆时长获取
+	AdminExp = time.Duration(v.GetInt("adminExp"))
+	UserExp = time.Duration(v.GetInt("userExp"))
 	//读取mysql,redis,rabbitmq,casbin
 	mysql := v.GetStringMap("mysql") //读取MySQL配置
-	redis := v.GetStringMap("redis") //读取redis配置
+	red := v.GetStringMap("redis")   //读取redis配置
 	mq := v.GetStringMap("rabbitmq") //读取rabbitmq配置
 	cn := v.GetStringMap("cabin")    //读取casbin配置
 	ck := v.GetStringMap("click")    //读取click house配置
 	//map转struct
 	mapstructure.Decode(mysql, &MysqlConfig)
-	mapstructure.Decode(redis, &RedisConfig)
+	mapstructure.Decode(red, &RedisConfig)
 	mapstructure.Decode(mq, &RabbitMQConfig)
 	mapstructure.Decode(logConfig, &LogConf)
 	mapstructure.Decode(cn, &CabinConfig)
 	mapstructure.Decode(ck, &ClickConfig)
 
+	//log.Print(CabinConfig, "参数")
 	//mapstructure.Decode(ca, &CaptchaConf)
 	//etcd := v.GetStringSlice("etcd")
 	//kafka := v.GetStringSlice("kafka")
@@ -111,10 +129,10 @@ func viperLoadConf() {
 	//EtcdArry = append(EtcdArry, etcd...)
 	//KafkaArry = append(KafkaArry, kafka...)
 	log.Println("全局配置文件信息读取无误,开始载入")
-	//Dbinit()         //mysql初始化
+	Dbinit()    //mysql初始化
 	Redisinit() //redis初始化
 	Loginit()   //日志初始化
-	//CasbinInit()     //rbac初始化
+	CabinInit() //rbac初始化
 	//OracleInit()     //Oracle初始化
 	//ClickhouseInit() //click house初始化
 	//EtcdInit()

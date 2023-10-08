@@ -18,23 +18,31 @@ type Admin struct {
 	Sex         int       `json:"sex" gorm:"comment:'性别'"`
 	Avatar      string    `json:"avatar" gorm:"comment:'头像'"`
 	Email       string    `json:"email" gorm:"comment:'邮箱'"`
-	Role        int       `json:"role" gorm:"comment:'权限'"`
+	Role        []Role    `gorm:"many2many:admin_role;"`
 	LoginIp     string    `json:"login_ip" gorm:"comment:'登录ip'"`
 	LoginAt     time.Time `json:"login_at" gorm:"comment:'登陆时间'"`
 }
 
-func AdminServiceImpl() Admin {
-	return Admin{}
+//func AdminRepository() *Admin {
+//	return &Admin{}
+//}
+
+type AdminRepositoryInter interface {
+	AdminList(list *reqDto.AdminList) (*resDto.CommonList, error)
+	CheckByName(userName string) (*Admin, error)
+	CheckByPhone(phone string) (*Admin, error)
+	CheckByNickName(nickName string) (*Admin, error)
+	RemoveAccessToken(id uint) error
+	UpdateToken(access_token string, id uint, ip string) error
 }
 
 var (
-	//admins=[]Admin{}
 	adminInfo    = resDto.AdminInfo{}
 	resAdminList = []resDto.AdminList{} //要查询的字段
 )
 
 // 分页,模糊查询用户
-func (a *Admin) AdminList(list reqDto.AdminList) (*resDto.CommonList, error) {
+func (a *Admin) AdminList(list *reqDto.AdminList) (*resDto.CommonList, error) {
 	query := db.Model(&a)
 	if list.Name != "" {
 		query.Where("user_name like ?", "%"+list.Name+"%")
@@ -51,7 +59,17 @@ func (a *Admin) AdminList(list reqDto.AdminList) (*resDto.CommonList, error) {
 // 查询账号
 func (a *Admin) CheckByNickName(nickName string) (*Admin, error) {
 	a.NickName = nickName
-	err := db.First(&a).Error
+	err := db.Preload("Role").First(&a).Error
+	if err != nil {
+		return nil, err
+	}
+	return a, nil
+}
+
+// 查询手机号
+func (a *Admin) CheckByPhone(phone string) (*Admin, error) {
+	a.Phone = phone
+	err := db.Preload("Role").First(&a).Error
 	if err != nil {
 		return nil, err
 	}
@@ -61,7 +79,7 @@ func (a *Admin) CheckByNickName(nickName string) (*Admin, error) {
 // 查询名称
 func (a *Admin) CheckByName(userName string) (*Admin, error) {
 	a.UserName = userName
-	err := db.First(&a).Error
+	err := db.Preload("Role").First(&a).Error
 	if err != nil {
 		return nil, err
 	}
@@ -69,9 +87,9 @@ func (a *Admin) CheckByName(userName string) (*Admin, error) {
 }
 
 // 详情数据
-func (a *Admin) AdminInfo(id int) (*resDto.AdminInfo, error) {
-	a.ID = uint(id)
-	err := db.Model(&a).Select("admin.name, admin.account,admin.role,r.name as role_name").Joins("left join rule as r on r.id = admin.role").Scan(&adminInfo).Error
+func (a *Admin) AdminInfo(id uint) (*resDto.AdminInfo, error) {
+	a.ID = id
+	err := db.Model(&a).Select("admin.*,r.name as role_name").Joins("left join rule as r on r.id = admin.role").Scan(&adminInfo).Error
 	if err != nil {
 		return nil, err
 	}
@@ -79,20 +97,22 @@ func (a *Admin) AdminInfo(id int) (*resDto.AdminInfo, error) {
 }
 
 // 更新token数据
-func (a *Admin) UpdateToken(access_token string, id uint) error {
+func (a *Admin) UpdateToken(access_token string, id uint, ip string) error {
 	a.ID = id
-	err := db.Model(&a).Update("access_token", access_token).Error
+	err := db.Model(&a).Updates(Admin{AccessToken: access_token, LoginAt: time.Now(), LoginIp: ip}).Error
 	if err != nil {
 		return err
 	}
 	return nil
 }
+func (a *Admin) RemoveAccessToken(id uint) error {
+	a.ID = id
+	return db.Model(&a).Update("access_token", "").Error
+
+}
 
 // 增加用户
 func (a *Admin) AddAdmin(admins Admin) error {
 	err := db.Create(&admins).Error
-	if err != nil {
-		return err
-	}
 	return err
 }

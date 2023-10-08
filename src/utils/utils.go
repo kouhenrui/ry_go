@@ -5,8 +5,11 @@ import (
 	"errors"
 	"fmt"
 	"github.com/go-playground/validator/v10"
+	"path/filepath"
 	"reflect"
 	"regexp"
+	"strconv"
+	"time"
 )
 
 // json格式化数据
@@ -83,88 +86,17 @@ func FuzzyMatch(param string, paths []string) bool {
 	return false
 }
 
-///*
-// * @MethodName CreateCaptcha
-// * @Description 生成图片验证
-// * @Author khr
-// * @Date 2023/5/8 10:44
-// */
-//
-//func CreateCaptcha() (error, reqDto.Captcha) {
-//	var newCaptcha reqDto.Captcha
-//	//定义一个driver
-//	var driver base64Captcha.Driver
-//	//创建一个字符串类型的验证码驱动DriverString, DriverChinese :中文驱动
-//	driverString := base64Captcha.DriverString{
-//		Height:          80,                                     //高度
-//		Width:           240,                                    //宽度
-//		NoiseCount:      0,                                      //干扰数
-//		ShowLineOptions: 6,                                      //展示个数
-//		Length:          6,                                      //长度
-//		Source:          "1234567890qwertyuioplkjhgfdsazxcvbnm", //验证码随机字符串来源
-//		BgColor: &color.RGBA{ // 背景颜色
-//			R: 3,
-//			G: 102,
-//			B: 214,
-//			A: 125,
-//		},
-//		//Fonts: []string{"wqy-microfiche.ttc"}, // 字体wqy-microhei.ttc
-//	}
-//	driver = driverString.ConvertFonts()
-//	//生成验证码
-//	c := base64Captcha.NewCaptcha(driver, &RedisStore{})
-//	id, content, err := c.Generate()
-//	if err != nil {
-//		fmt.Println("生成有错:", err)
-//		return err, newCaptcha
-//	}
-//	newCaptcha.Id = id
-//	newCaptcha.Content = content
-//
-//	return nil, newCaptcha
-//
-//}
-//
-///*
-// * @MethodName VerifyCaptcha
-// * @Description 验证图片验证码
-// * @Author khr
-// * @Date 2023/5/8 10:45
-// */
-//
-//func VerifyCaptcha(capt reqDto.Captcha) bool {
-//	// id 验证码id
-//	// answer 需要校验的内容
-//	// clear 校验完是否清除
-//	store := &RedisStore{}
-//	if store.Verify(capt.Id, capt.Content, true) {
-//
-//		fmt.Println("验证正确")
-//		return true
-//	} else {
-//		fmt.Println("验证cuowu ")
-//		return false
-//	}
-//	//return nil, store.Verify(capt.Id, capt.Content, true)
-//}
-//
-//type RedisStore struct{}
-//
-//func (s *RedisStore) Set(id string, value string) error {
-//	key := global.Captcha + id
-//	return global.SetRedis(key, []byte(value), global.CaptchaExp) //Redis.Set(ctx, key, value, global.CaptchaExp).Err()
-//}
-//func (s *RedisStore) Get(id string, clear bool) string {
-//	key := global.Captcha + id
-//	val := global.GetRedis(key)
-//	err := global.DelRedis(key)
-//	if err != nil {
-//		fmt.Println(err)
-//		return ""
-//	}
-//	return val
-//}
-//func (s *RedisStore) Verify(id, answer string, clear bool) bool {
-//	v := s.Get(id, clear)
-//	return v == answer
-//}
+/**
+ * @Author Khr
+ * @Description //TODO 根据时间戳生成名称
+ * @Date 15:41 2023/9/27
+ * @Param
+ * @return
+ **/
+func GenerateUniqueFileName(originalFileName string) string {
+	// 生成唯一的文件名，可以使用时间戳或随机数等方式
+	timestamp := time.Now().UnixNano()
+	extension := filepath.Ext(originalFileName)
+	uniqueFileName := strconv.FormatInt(timestamp, 10) + extension
+	return uniqueFileName
+}
