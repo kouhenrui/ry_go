@@ -8,15 +8,18 @@ import (
 	"ry_go/src/dto/reqDto"
 	"ry_go/src/dto/resDto"
 	"ry_go/src/global"
+	inter2 "ry_go/src/inter"
 	"ry_go/src/msg"
 	"ry_go/src/pojo"
-	"ry_go/src/pojo/inter"
 	util "ry_go/src/utils"
 )
 
 var (
 	admin *pojo.Admin
 	err   error
+
+	adminRepository inter2.AdminRepositoryInter = &inter2.AdminRepositoryImpl{}
+	roleRepository  inter2.RoleInter            = &inter2.RoleRepositoryImpl{}
 )
 
 type AdminInter interface {
@@ -24,8 +27,6 @@ type AdminInter interface {
 	Register(body reqDto.AddAdmin) error
 }
 type AdminService struct {
-	adminRepository inter.AdminRepositoryImpl // pojo.AdminRepositoryInter
-	roleRepository  pojo.RoleInterface
 }
 
 /**
@@ -39,11 +40,11 @@ func (i *AdminService) Login(body reqDto.AdminLogin, ip string) (t resDto.TokenA
 	//判定登陆方式
 	switch body.Method {
 	case "name":
-		admin, err = i.adminRepository.CheckByName(body.UserName)
+		admin, err = adminRepository.CheckByName(body.UserName)
 		break
 
 	case "phone":
-		admin, err = i.adminRepository.CheckByPhone(body.Phone)
+		admin, err = adminRepository.CheckByPhone(body.Phone)
 		break
 	default:
 		return t, errors.New(msg.AUTH_LOGIN_ERROR)
@@ -72,7 +73,7 @@ func (i *AdminService) Login(body reqDto.AdminLogin, ip string) (t resDto.TokenA
 			if redisErr != nil {
 				global.DelRedis(admin.AccessToken)
 			}
-			if err = i.adminRepository.RemoveAccessToken(admin.ID); err != nil {
+			if err = adminRepository.RemoveAccessToken(admin.ID); err != nil {
 				return t, err
 			}
 		}
@@ -114,7 +115,7 @@ func (i *AdminService) tokenRedis(tokenDate comDto.TokenClaims, ip string) (t re
 		return t, err
 	}
 	//数据库保存access_token
-	if err = i.adminRepository.UpdateToken(access_token, admin.ID, ip); err != nil {
+	if err = adminRepository.UpdateToken(access_token, admin.ID, ip); err != nil {
 		return t, err
 	}
 	return t, nil
@@ -128,21 +129,20 @@ func (i *AdminService) tokenRedis(tokenDate comDto.TokenClaims, ip string) (t re
  * @return
  **/
 func (i *AdminService) Register(body reqDto.AddAdmin) error {
-	fmt.Println(body, "+++++++++++++++")
 	if len(body.UserName) < 0 && len(body.Phone) < 0 {
 		return errors.New(msg.ACCOUNT_PHONE_NOT_NULL)
 	}
 	fmt.Println(1)
 	if len(body.UserName) > 0 {
 		fmt.Println(body.UserName)
-		_, err = i.adminRepository.CheckByName(body.UserName)
+		_, err = adminRepository.CheckByName(body.UserName)
 		if err != nil {
 			return err
 		}
 	}
 	fmt.Println(2)
 	if len(body.Phone) > 0 {
-		_, err = i.adminRepository.CheckByPhone(body.Phone)
+		_, err = adminRepository.CheckByPhone(body.Phone)
 		if err != nil {
 			return err
 		}
@@ -154,7 +154,7 @@ func (i *AdminService) Register(body reqDto.AddAdmin) error {
 	if len(body.Role) > 0 {
 		for _, id := range body.Role {
 			var singleRole = pojo.Role{}
-			findRole, signErr := i.roleRepository.FindById(id)
+			findRole, signErr := roleRepository.FindById(id)
 			if signErr != nil {
 				return err
 			}
@@ -176,5 +176,5 @@ func (i *AdminService) Register(body reqDto.AddAdmin) error {
 		Role:     roles,
 	}
 	log.Println("打印要插入的数据", newAdmin)
-	return i.adminRepository.AddAdmin(newAdmin)
+	return adminRepository.AddAdmin(newAdmin)
 }

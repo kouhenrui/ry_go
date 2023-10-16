@@ -20,6 +20,7 @@ var (
 type AdminRepositoryImpl struct {
 	adminRepository *pojo.Admin
 }
+
 type AdminRepositoryInter interface {
 	AdminList(list *reqDto.AdminList) (*resDto.CommonList, error)
 	CheckByName(userName string) (*pojo.Admin, error)
@@ -27,7 +28,7 @@ type AdminRepositoryInter interface {
 	CheckByNickName(nickName string) (*pojo.Admin, error)
 	RemoveAccessToken(id uint) error
 	UpdateToken(access_token string, id uint, ip string) error
-	AddAdmin(body *pojo.Admin) error
+	AddAdmin(body pojo.Admin) error
 }
 
 // TODO 根据手机号查询

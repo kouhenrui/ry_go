@@ -90,6 +90,7 @@ func init() {
 		fmt.Println("无法创建上传视频目录:", err)
 
 	}
+	log.Println("所有配置完成检索，开始执行程序")
 
 }
 func viperLoadConf() {

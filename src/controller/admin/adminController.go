@@ -1,7 +1,6 @@
 package admin
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"ry_go/src/dto/reqDto"
@@ -11,8 +10,8 @@ import (
 )
 
 var (
-	//adminService inter.AdminInter
-	adminService admin.AdminService
+	adminService admin.AdminInter = &admin.AdminService{}
+	//adminService admin.AdminService
 )
 
 func Login(c *gin.Context) {
@@ -47,7 +46,6 @@ func Register(c *gin.Context) {
 		c.AbortWithError(http.StatusBadRequest, util.GetValidate(err, &addAdmin))
 		return
 	}
-	fmt.Println("==============================", &addAdmin)
 	err := adminService.Register(addAdmin)
 	if err != nil {
 		c.Error(err)
