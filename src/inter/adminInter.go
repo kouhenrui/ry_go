@@ -12,14 +12,13 @@ import (
 
 var (
 	db           = global.MysqlDClient
+	a            = &pojo.Admin{}
 	resAdminList []resDto.AdminList
 	count        int64
 	reslist      resDto.CommonList
 )
 
-type AdminRepositoryImpl struct {
-	adminRepository *pojo.Admin
-}
+type AdminRepositoryImpl struct{}
 
 type AdminRepositoryInter interface {
 	AdminList(list *reqDto.AdminList) (*resDto.CommonList, error)
@@ -33,20 +32,20 @@ type AdminRepositoryInter interface {
 
 // TODO 根据手机号查询
 func (ap *AdminRepositoryImpl) CheckByPhone(phone string) (*pojo.Admin, error) {
-	ap.adminRepository.Phone = phone
-	err := db.Preload("Role").First(ap.adminRepository).Error
+	a.Phone = phone
+	err := db.Preload("Role").First(a).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, nil
 		}
 		return nil, err
 	}
-	return ap.adminRepository, nil
+	return a, nil
 }
 
 // TODO 列表
 func (ap *AdminRepositoryImpl) AdminList(list *reqDto.AdminList) (*resDto.CommonList, error) {
-	query := db.Model(ap.adminRepository)
+	query := db.Model(a)
 	if list.Name != "" {
 		query.Where("user_name like ?", "%"+list.Name+"%")
 	}
@@ -61,21 +60,21 @@ func (ap *AdminRepositoryImpl) AdminList(list *reqDto.AdminList) (*resDto.Common
 
 // TODO 查询账号
 func (ap *AdminRepositoryImpl) CheckByNickName(nickName string) (*pojo.Admin, error) {
-	ap.adminRepository.NickName = nickName
-	err := db.Preload("Role").First(ap.adminRepository).Error
+	a.NickName = nickName
+	err := db.Preload("Role").First(a).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, nil
 		}
 		return nil, err
 	}
-	return ap.adminRepository, nil
+	return a, nil
 }
 
 // TODO 查询昵称
 func (ap *AdminRepositoryImpl) CheckByName(userName string) (*pojo.Admin, error) {
-	ap.adminRepository.UserName = userName
-	err := db.First(ap.adminRepository).Error
+	a.UserName = userName
+	err := db.First(a).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, nil
@@ -83,13 +82,13 @@ func (ap *AdminRepositoryImpl) CheckByName(userName string) (*pojo.Admin, error)
 		return nil, err
 
 	}
-	return ap.adminRepository, nil
+	return a, nil
 }
 
 // TODO 详情数据
 func (ap *AdminRepositoryImpl) AdminInfo(id uint) (*resDto.AdminInfo, error) {
-	ap.adminRepository.ID = id
-	err := db.Model(ap.adminRepository).Preload("Role").Find(resDto.AdminInfo{}).Error //.Select("inter.*,r.name as role_name").Joins("left join rule as r on r.id = inter.role").Scan(&adminInfo).Error
+	a.ID = id
+	err := db.Model(a).Preload("Role").Find(resDto.AdminInfo{}).Error //.Select("inter.*,r.name as role_name").Joins("left join rule as r on r.id = inter.role").Scan(&adminInfo).Error
 	if err != nil {
 		return nil, err
 	}
@@ -98,8 +97,8 @@ func (ap *AdminRepositoryImpl) AdminInfo(id uint) (*resDto.AdminInfo, error) {
 
 // TODO 更新token数据
 func (ap *AdminRepositoryImpl) UpdateToken(access_token string, id uint, ip string) error {
-	ap.adminRepository.ID = id
-	err := db.Model(ap.adminRepository).Updates(pojo.Admin{AccessToken: access_token, LoginAt: time.Now(), LoginIp: ip}).Error
+	a.ID = id
+	err := db.Model(a).Updates(pojo.Admin{AccessToken: access_token, LoginAt: time.Now(), LoginIp: ip}).Error
 	if err != nil {
 		return err
 	}
@@ -108,8 +107,8 @@ func (ap *AdminRepositoryImpl) UpdateToken(access_token string, id uint, ip stri
 
 // TODO 去除token
 func (ap *AdminRepositoryImpl) RemoveAccessToken(id uint) error {
-	ap.adminRepository.ID = id
-	return db.Model(ap.adminRepository).Update("access_token", "").Error
+	a.ID = id
+	return db.Model(a).Update("access_token", "").Error
 
 }
 

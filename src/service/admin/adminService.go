@@ -15,9 +15,8 @@ import (
 )
 
 var (
-	admin *pojo.Admin
-	err   error
-
+	admin           *pojo.Admin
+	err             error
 	adminRepository inter2.AdminRepositoryInter = &inter2.AdminRepositoryImpl{}
 	roleRepository  inter2.RoleInter            = &inter2.RoleRepositoryImpl{}
 )
@@ -26,8 +25,7 @@ type AdminInter interface {
 	Login(body reqDto.AdminLogin, ip string) (resDto.TokenAndExp, error)
 	Register(body reqDto.AddAdmin) error
 }
-type AdminService struct {
-}
+type AdminService struct{}
 
 /**
  * @Author Khr
@@ -132,7 +130,6 @@ func (i *AdminService) Register(body reqDto.AddAdmin) error {
 	if len(body.UserName) < 0 && len(body.Phone) < 0 {
 		return errors.New(msg.ACCOUNT_PHONE_NOT_NULL)
 	}
-	fmt.Println(1)
 	if len(body.UserName) > 0 {
 		fmt.Println(body.UserName)
 		_, err = adminRepository.CheckByName(body.UserName)
@@ -140,20 +137,18 @@ func (i *AdminService) Register(body reqDto.AddAdmin) error {
 			return err
 		}
 	}
-	fmt.Println(2)
 	if len(body.Phone) > 0 {
 		_, err = adminRepository.CheckByPhone(body.Phone)
 		if err != nil {
 			return err
 		}
 	}
-	fmt.Println(3)
 	var salt = util.MakeSalt()
 	var enpwd, _ = util.EnPwdCode(body.Password, salt)
 	var roles = []pojo.Role{}
 	if len(body.Role) > 0 {
 		for _, id := range body.Role {
-			var singleRole = pojo.Role{}
+			var singleRole pojo.Role
 			findRole, signErr := roleRepository.FindById(id)
 			if signErr != nil {
 				return err

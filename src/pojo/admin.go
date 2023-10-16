@@ -17,8 +17,8 @@ type Admin struct {
 	Avatar      string    `json:"avatar" gorm:"comment:'头像'"`
 	Email       string    `json:"email" gorm:"comment:'邮箱'"`
 	Role        []Role    `gorm:"many2many:admin_role;"`
-	LoginIp     string    `json:"login_ip" gorm:"comment:'登录ip'"`
-	LoginAt     time.Time `json:"login_at" gorm:"comment:'登陆时间'"`
+	LoginIp     string    `json:"login_ip" gorm:"comment:'登录ip';default:null"`
+	LoginAt     time.Time `json:"login_at" gorm:"default:null;comment:'登陆时间'"`
 }
 
 //type AdminRepositoryInter interface {

@@ -3,6 +3,7 @@ package middleware
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"log"
 	"net/http"
 	"runtime/debug"
 	"ry_go/src/dto/comDto"
@@ -21,7 +22,7 @@ func GlobalErrorMiddleware() gin.HandlerFunc {
 			fmt.Println("程序捕捉错误")
 			if r := recover(); r != nil {
 				fmt.Println("打印错误信息:", r)
-
+				log.Println(string(debug.Stack()))
 				// 打印错误堆栈信息
 				debug.PrintStack()
 				errorMessage := string(debug.Stack())

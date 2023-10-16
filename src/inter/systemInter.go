@@ -7,8 +7,11 @@ import (
 	"ry_go/src/pojo"
 )
 
+var (
+	r = &pojo.Role{}
+)
+
 type RoleRepositoryImpl struct {
-	roleRepository *pojo.Role
 }
 
 type RoleInter interface {
@@ -16,8 +19,8 @@ type RoleInter interface {
 }
 
 // TODO 通过ID查找
-func (r *RoleRepositoryImpl) FindById(id int) (*pojo.Role, error) {
-	r.roleRepository.ID = uint(id)
+func (rp *RoleRepositoryImpl) FindById(id int) (*pojo.Role, error) {
+	r.ID = uint(id)
 	err := db.First(r).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
@@ -25,5 +28,5 @@ func (r *RoleRepositoryImpl) FindById(id int) (*pojo.Role, error) {
 		}
 		return nil, err
 	}
-	return r.roleRepository, nil
+	return r, nil
 }
