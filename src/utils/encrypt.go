@@ -7,6 +7,7 @@ import (
 	"encoding/base64"
 	"errors"
 	"math/rand"
+	"ry_go/src/msg"
 	"time"
 )
 
@@ -146,12 +147,12 @@ func DePwdCode(pwd string, pwdKey string) (string, error) {
 	pwdByte, err := base64.StdEncoding.DecodeString(pwd)
 	if err != nil {
 		//errors.New(INTERNAL_ERROR)
-		return INTERNAL_ERROR, err
+		return msg.INTERNAL_ERROR, err
 	}
 	//执行AES解密
 	ecpwsd, erro := aesDeCrypt(pwdByte, PwdKey)
 	if erro != nil {
-		return PASSWORD_RESOLUTION_ERROR, erro
+		return msg.PASSWORD_RESOLUTION_ERROR, erro
 	}
 	return string(ecpwsd), erro
 

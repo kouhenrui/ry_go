@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"reflect"
 	"regexp"
+	"ry_go/src/msg"
 	"strconv"
 	"time"
 )
@@ -20,7 +21,7 @@ func Marshal(user interface{}) []byte {
 func UnMarshal(r []byte, res interface{}) (bool, interface{}) {
 	err := json.Unmarshal(r, &res)
 	if err != nil {
-		return false, REDIS_INFORMATION_ERROR
+		return false, msg.REDIS_INFORMATION_ERROR
 	}
 	return true, res
 }

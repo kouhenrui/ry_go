@@ -21,12 +21,12 @@ func GlobalErrorMiddleware() gin.HandlerFunc {
 			fmt.Println("程序捕捉错误")
 			if r := recover(); r != nil {
 				fmt.Println("打印错误信息:", r)
+
 				// 打印错误堆栈信息
 				debug.PrintStack()
-				err := c.Errors.Last()
-				errorMessage := err.Err.Error()
+				errorMessage := string(debug.Stack())
 				c.JSON(http.StatusInternalServerError, &comDto.ResponseData{
-					Code:    int(err.Type),
+					Code:    http.StatusInternalServerError,
 					Message: errorMessage,
 					Data:    nil,
 				})
@@ -48,10 +48,7 @@ func GlobalErrorMiddleware() gin.HandlerFunc {
 
 func UnifiedResponseMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-
-		fmt.Println("1")
 		c.Next()
-		fmt.Println("2")
 		if len(c.Errors) > 0 {
 			fmt.Println("出现错误", c.Errors)
 			err := c.Errors.Last()

@@ -27,9 +27,10 @@ func Redisinit() {
 	})
 	_, err = RedisClient.Ping(context.Background()).Result()
 	if err != nil {
+		panic("redis connect get failed.%v")
 		//fmt.Printf("redis connect get failed.%v", err.Error())
-		log.Fatalf("redis connect get failed.%v", err.Error())
-		return
+		//log.Fatalf("redis connect get failed.%v", err.Error())
+		//return
 	}
 	//fmt.Printf("redis 初始化连接成功")
 	log.Printf("redis 初始化连接成功")

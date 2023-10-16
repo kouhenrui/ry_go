@@ -72,12 +72,22 @@ click:
   name: "root"
   password: "123456"
 
+
+#语言
 language: "zh"
 
+#验证码缓存名称和
 captcha:  "captcha:"
 CaptchaExp: 1
 
+#登陆时长限制
 adminExp: 7
 userExp: 3
 #oracle
 #oracle: ["system/system@192.168.245.22:1521/XE"]
+
+
+#jwt密钥
+jwtKey: "gGOzNMZxvcBGfCUcrN0d"
+#传输加密密钥
+encryptionKey:  "ufeUWEHVn32veswvrsvD"

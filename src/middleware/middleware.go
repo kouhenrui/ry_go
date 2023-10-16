@@ -2,7 +2,6 @@ package middleware
 
 import (
 	"bytes"
-	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
@@ -12,6 +11,7 @@ import (
 	"net/http"
 	"ry_go/src/dto/comDto"
 	"ry_go/src/global"
+	"ry_go/src/msg"
 	util "ry_go/src/utils"
 	"sync"
 	"time"
@@ -52,37 +52,6 @@ func Cors() gin.HandlerFunc {
 		c.Next()
 	}
 }
-
-func NotFoundAndMethodNotAllowedHandler() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		c.Next()
-
-		// 如果在处理请求后仍然没有找到路由，说明是404错误
-		if c.Writer.Status() == http.StatusNotFound {
-			c.AbortWithError(http.StatusNotFound, errors.New("404 Not Found"))
-		}
-
-		// 如果请求方法不被允许，说明是405错误
-		if c.Writer.Status() == http.StatusMethodNotAllowed {
-			c.AbortWithError(http.StatusMethodNotAllowed, errors.New("405 Method Not Allowed"))
-		}
-	}
-}
-
-//func MethodNotAllowedHandler() gin.HandlerFunc {
-//	fmt.Println("405不允许")
-//	return func(c *gin.Context) {
-//		c.AbortWithError(http.StatusMethodNotAllowed, errors.New("405 Method Not Allowed"))
-//	}
-//}
-//
-//func NotFoundHandler() gin.HandlerFunc {
-//	fmt.Println("404未找到")
-//	//c.AbortWithError(http.StatusNotFound, errors.New("404 Not Found"))
-//	return func(c *gin.Context) {
-//		c.AbortWithError(http.StatusNotFound, errors.New("404 Not Found"))
-//	}
-//}
 
 /*
 * @MethodName
@@ -148,7 +117,7 @@ func GolbalMiddleWare() gin.HandlerFunc {
 			existToken := c.GetHeader("Authorization")
 			//判断token是否存在
 			if len(existToken) < 0 || existToken == "" {
-				c.AbortWithStatusJSON(http.StatusUnauthorized, util.NO_AUTHORIZATION)
+				c.AbortWithStatusJSON(http.StatusUnauthorized, msg.NO_AUTHORIZATION)
 				return
 			}
 

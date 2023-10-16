@@ -2,6 +2,7 @@ package route
 
 import (
 	"github.com/gin-gonic/gin"
+	"ry_go/src/controller/admin"
 	"ry_go/src/controller/common"
 )
 
@@ -20,11 +21,13 @@ func InitApi(route *gin.Engine) {
 		api.GET("/captcha", common.GetCaptcha)
 		api.POST("/verify/captcha", common.VfCaptcha)
 		api.POST("/upload/file", common.UploadFile)
-		//authModule := api.Group("/auth")
-		//
-		//{
-		//	authModule.POST("auth")
-		//}
+		authModule := api.Group("/auth")
+
+		{
+			authModule.POST("/login", admin.Login)
+			authModule.GET("/info", admin.Info)
+			authModule.POST("/register", admin.Register)
+		}
 	}
 
 }

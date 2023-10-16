@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"ry_go/src/dto/reqDto"
 	"ry_go/src/global"
+	"ry_go/src/msg"
 	"ry_go/src/service/common"
 	util "ry_go/src/utils"
 	"strings"
@@ -63,7 +64,7 @@ func UploadFile(c *gin.Context) {
 	}
 	file, err := c.FormFile("file")
 	if err != nil {
-		c.Error(errors.New(util.FILE_TYPE_ERROR))
+		c.Error(errors.New(msg.FILE_TYPE_ERROR))
 		//c.Error(errors.New(util.FILE_TYPE_ERROR))
 	}
 	filename := file.Filename
@@ -92,7 +93,7 @@ func uploadVideo(c *gin.Context) {
 	types := strings.Split(filetype, "/")
 	fmt.Println(types, "文件类型")
 	if types[0] != "video" {
-		c.Error(errors.New(util.FILE_TYPE_ERROR))
+		c.Error(errors.New(msg.FILE_TYPE_ERROR))
 	}
 	filename := file.Filename
 	newFileName := util.GenerateUniqueFileName(filename)

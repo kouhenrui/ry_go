@@ -1,4 +1,4 @@
-package util
+package msg
 
 const (
 	//权限错误
@@ -8,7 +8,7 @@ const (
 	MODIFICATION_SUCCESSE            = "修改成功"
 	ADD_SUCCESS                      = "增加成功"
 	DELETE_SUCCESS                   = "删除成功"
-	NAME_AND_ACCOUNT_EXIST_ERROR     = "姓名账号已存在"
+	NAME_AND_ACCOUNT_EXIST_ERROR     = "账号已存在"
 	NAME_EXIST_ERROR                 = "名称已存在"
 	ACCOUNT_EXIST_ERROR              = "账号已存在"
 	AUTH_LOGIN_PASSWORD_ERROR        = "密码验证错误"
@@ -46,7 +46,6 @@ const (
 	WEBSOCKET_CONNECT_ERROR = "websocket连接错误"
 
 	//权限错误
-	INSUFFICENT_PERMISSION     = "权限不足"
 	PERMISSION_NOT_FOUND_ERROR = "请求删除的权限未找到"
 	PERMISSION_ADD_SUCCESS     = "权限写入成功"
 
@@ -58,4 +57,8 @@ const (
 	CAPTCHA_CREATE_ERROR = "图片验证码生成错误"
 
 	SQL_NOT_EXIT_ERROR = "查询记录不存在"
+
+	//sql
+	ACCOUNT_PHONE_NOT_NULL = "账号未填写"
+	NOT_FOUND_ERROR        = "未找到匹配数据"
 )

@@ -13,18 +13,20 @@ import (
 	"log"
 	"os"
 	"ry_go/src/global/conf"
+	"ry_go/src/pojo"
 	"time"
-) /**
+)
+
+/**
  * @ClassName index
  * @Description TODO
  * @Author khr
  * @Date 2023/7/29 14:36
  * @Version 1.0
- */var (
+ */
+var (
 	v               *viper.Viper
 	err             error
-	day             = time.Hour * 24
-	hour            = time.Hour
 	minute          = time.Minute
 	ctx             = context.Background()
 	Captcha         string //redis缓存验证码前缀
@@ -35,8 +37,7 @@ import (
 	RedisClient     *redis.Client
 	MysqlDClient    *gorm.DB
 	EtcdClient      *clientv3.Client
-	JWTKEY          = "12"
-	LANGUAGE        = "zh"
+	JWTKEY          string
 	IpAccess        = []string{"127.0.0.1"}
 	WriteList       = []string{"/api/upload/file", "/api/captcha"}
 	EtcdArry        = []string{"192.168.245.22:2379"}
@@ -103,7 +104,7 @@ func viperLoadConf() {
 	logConfig := v.GetStringMap("log")
 	FilePath = v.GetString("FilePath")
 	VideoPath = v.GetString("VideoPath")
-
+	JWTKEY = v.GetString("JWTKEY")
 	//登陆时长获取
 	AdminExp = time.Duration(v.GetInt("adminExp"))
 	UserExp = time.Duration(v.GetInt("userExp"))
@@ -129,10 +130,12 @@ func viperLoadConf() {
 	//EtcdArry = append(EtcdArry, etcd...)
 	//KafkaArry = append(KafkaArry, kafka...)
 	log.Println("全局配置文件信息读取无误,开始载入")
-	Dbinit()    //mysql初始化
-	Redisinit() //redis初始化
-	Loginit()   //日志初始化
-	CabinInit() //rbac初始化
+	Loginit()                         //日志初始化
+	Dbinit()                          //mysql初始化
+	pojo.Repositoryinit(MysqlDClient) //表结构迁移
+	Redisinit()                       //redis初始化
+
+	//CabinInit() //rbac初始化
 	//OracleInit()     //Oracle初始化
 	//ClickhouseInit() //click house初始化
 	//EtcdInit()

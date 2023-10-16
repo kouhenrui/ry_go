@@ -25,7 +25,7 @@ type AllClaims struct {
 	User comDto.TokenClaims
 }
 
-// 颁发token admin
+// 颁发token inter
 func SignToken(infoClaims comDto.TokenClaims, day time.Duration) (t resDto.TokenAndExp) {
 	expireTime := time.Now().Add(day) //7天过期时间
 	claims := &AllClaims{

@@ -1,11 +1,13 @@
 package reqDto
 
 type AdminLogin struct {
-	Phone    string `json:"phone"`
+	Phone    string `json:"phone" binding:"len=12"`
 	UserName string `json:"user_name"`
 	Password string `json:"password" binding:"required"`
-	Method   string `json:"method" binding:"required,oneof=user_name phone" `
-	Revoke   bool   `json:"revoke" validate:"required"`
+	Method   string `json:"method" binding:"oneof=user_name phone,required" `
+	Revoke   bool   `json:"revoke" binding:"required"`
+	Code     string `json:"code" binding:"required,len=6"`
+	Uuid     string `json:"uuid" binding:"required"`
 }
 type UpdateAdmin struct {
 	Id       uint   `json:"id"`
@@ -13,11 +15,14 @@ type UpdateAdmin struct {
 	Password string `json:"password"`
 }
 type AddAdmin struct {
-	Name     string `json:"name,omitempty"`
-	Account  string `json:"account"  binding:"required" validate:"required"`
-	Password string `json:"password,omitempty"`
-	Role     int    `json:"role"`
-	Salt     string `json:"salt,omitempty"`
+	UserName string `json:"user_name" binding:""`
+	NickName string `json:"nick_name" binding:""`
+	Password string `json:"password" binding:"len=6,omitempty"`
+	Phone    string `json:"phone" ` //binding:"len=12,omitempty,-"
+	Sex      int    `json:"sex" `   //binding:"len=1,omitempty,-"
+	Avatar   string `json:"avatar" binding:""`
+	Email    string `json:"email" ` //binding:"email,omitempty,-"
+	Role     []int  `json:"role" binding:""`
 }
 type AdminList struct {
 	Take int    `json:"take,omitempty" binding:"required"`
