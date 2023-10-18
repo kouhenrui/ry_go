@@ -11,6 +11,13 @@ var (
 	capcha = util.NewCaptchaService()
 )
 
+type CommonServiceImpl struct {
+}
+type CommonServiceInter interface {
+	GetCaptcha() (error, reqDto.Captcha)
+	VfCaptcha(capt reqDto.Captcha) bool
+}
+
 /**
  * @Author Khr
  * @Description //TODO 调用方法生成验证码
@@ -18,7 +25,7 @@ var (
  * @Param
  * @return
  **/
-func GetCaptcha() (error, reqDto.Captcha) {
+func (c *CommonServiceImpl) GetCaptcha() (error, reqDto.Captcha) {
 
 	var newCaptcha reqDto.Captcha
 
@@ -36,7 +43,7 @@ func GetCaptcha() (error, reqDto.Captcha) {
  * @Param
  * @return
  **/
-func VfCaptcha(capt reqDto.Captcha) bool {
+func (c *CommonServiceImpl) VfCaptcha(capt reqDto.Captcha) bool {
 	return capcha.VerifyCaptcha(capt.Id, capt.Content)
 }
 
@@ -47,7 +54,7 @@ func VfCaptcha(capt reqDto.Captcha) bool {
  * @Param
  * @return
  **/
-func UploadFile(file *multipart.FileHeader) {
+func (c *CommonServiceImpl) UploadFile(file *multipart.FileHeader) {
 
 	//fmt.Println(file, "上传的文件")
 	//获取上传文件的类型

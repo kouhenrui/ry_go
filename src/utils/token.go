@@ -1,24 +1,16 @@
 package util
 
 import (
-	"fmt"
+	"errors"
 	"github.com/go-pay/gopay/pkg/jwt"
 	"ry_go/src/dto/comDto"
 	"ry_go/src/dto/resDto"
 	"ry_go/src/global"
+	"ry_go/src/msg"
 	"time"
 )
 
 var jwtkey = []byte(global.JWTKEY)
-
-// var userInfo pojo.User
-type UserClaims struct {
-	Name     string `json:"name"`
-	Role     int    `json:"role"`
-	Account  string `json:"account"`
-	Id       uint   `json:"id"`
-	RoleName string `json:"role_name"`
-}
 
 type AllClaims struct {
 	jwt.StandardClaims
@@ -41,7 +33,8 @@ func SignToken(infoClaims comDto.TokenClaims, day time.Duration) (t resDto.Token
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	tokenString, err := token.SignedString(jwtkey)
 	if err != nil {
-		fmt.Println(err, "生成token错误")
+		errors.New(msg.MAKE_TOKEN_ERROR)
+		//fmt.Println(err, "生成token错误")
 	}
 	tFStr := expireTime.Format("2006-01-02 15:04:05")
 	t.Token = tokenString
@@ -61,12 +54,11 @@ func SignToken(infoClaims comDto.TokenClaims, day time.Duration) (t resDto.Token
 
 // 解析Token
 func ParseToken(tokenString string) comDto.TokenClaims {
-	//claims := &Claims{}
+	//fmt.Println(token)
 	//解析token
 	token, _ := jwt.ParseWithClaims(tokenString, &AllClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return jwtkey, nil
 	})
 	user, _ := token.Claims.(*AllClaims)
-	//fmt.Println(user.User, "打印")
 	return user.User
 }

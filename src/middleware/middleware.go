@@ -7,12 +7,14 @@ import (
 	"github.com/sirupsen/logrus"
 	"golang.org/x/time/rate"
 	"io/ioutil"
+	"log"
 	"math"
 	"net/http"
 	"ry_go/src/dto/comDto"
 	"ry_go/src/global"
 	"ry_go/src/msg"
 	util "ry_go/src/utils"
+	"strings"
 	"sync"
 	"time"
 )
@@ -110,9 +112,16 @@ func GolbalMiddleWare() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		fmt.Println("token认证开始执行")
 		//t := time.Now()
+		var ip string
+		if ip = c.ClientIP(); len(ip) < 0 {
+			ip = c.Request.Host
+		}
+		c.Set("ip", ip)
 		requestUrl := c.Request.URL.String()
+		c.Set("reqUrl", requestUrl)
 		//路径模糊匹配
 		if !util.FuzzyMatch(requestUrl, global.WriteList) {
+			//log.Println("不是公共访问路径")
 			//请求头是否携带token
 			existToken := c.GetHeader("Authorization")
 			//判断token是否存在
@@ -120,9 +129,21 @@ func GolbalMiddleWare() gin.HandlerFunc {
 				c.AbortWithStatusJSON(http.StatusUnauthorized, msg.NO_AUTHORIZATION)
 				return
 			}
-
-			claims = util.ParseToken(c.GetHeader("Authorization"))
-			c.Set("role", claims.Role)
+			token := strings.Split(existToken, " ")[1]
+			claims = util.ParseToken(token)
+			r := claims.Role
+			var roles []string
+			if len(r) > 0 {
+				for _, i := range r {
+					roles = append(roles, i.Name)
+				}
+			}
+			fmt.Println(roles, "解析数据")
+			c.Set("user_id", claims.Id)
+			c.Set("user_name", claims.Name)
+			c.Set("user_phone", claims.Phone)
+			c.Set("user_role", roles)
+			//c.Set("user", claims)
 		}
 		c.Next()
 		//ts := time.Since(t)
@@ -224,68 +245,68 @@ func GolbalMiddleWare() gin.HandlerFunc {
 var visitorMap = make(map[string]*rate.Limiter) // 存储IP地址和速率限制器的映射
 var mu sync.Mutex                               // 互斥锁，保证并发安全
 
-//func IPInterceptor() gin.HandlerFunc {
-//	return func(c *gin.Context) {
-//		ip := c.ClientIP()
-//		if ip == "" {
-//			ip = c.Request.RemoteAddr
-//		}
-//		if util.ExistIn(ip, global.IpAccess) {
-//			c.Next()
-//		}
-//		path := c.Request.URL.Path
-//		//fmt.Println(ip, path)
-//
-//		// 组合出 key
-//		key := fmt.Sprintf("request:%s:%s", ip, path)
-//		//fmt.Print("key", key)
-//		// 将请求次数 +1，并设置过期时间
-//		err := global.AutoInc(key)
-//
-//		if err != nil {
-//			// 记录日志
-//			fmt.Println("incr error:", err)
-//			c.AbortWithError(http.StatusInternalServerError, err)
-//			return
-//		}
-//		if err = global.ExpireRedis(key, time.Hour); err != nil {
-//			log.Printf("redis缓存失败：%s", err)
-//			c.AbortWithError(http.StatusInternalServerError, err)
-//			return
-//		}
-//
-//		// 获取当前IP在 path 上的请求次数
-//		accessTime := global.GetLimitRedis(key)
-//
-//		if err != nil {
-//			// 记录日志
-//			fmt.Println("get error:", err)
-//			c.AbortWithStatus(http.StatusInternalServerError)
-//			return
-//		}
-//		//ip一小时内访问路径超过次数限制，拒绝访问
-//		if accessTime > 60 {
-//			requestLimit := fmt.Sprintf("request:%s:%s", ip, path)
-//			if err = global.RpushRedis(global.InterceptPrefix, requestLimit); err != nil {
-//				c.AbortWithStatusJSON(http.StatusServiceUnavailable, err)
-//				return
-//			}
-//			c.AbortWithStatusJSON(http.StatusTooManyRequests, gin.H{"error": "too many requests"})
-//			return
-//		}
-//		mu.Lock()
-//		_, ok := visitorMap[ip]
-//		var limiter = rate.NewLimiter(1, 10) // 设置限制为1个请求/秒，最多允许10个并发请求
-//		// 如果该IP地址不存在，则创建一个速率限制器
-//		if !ok {
-//			visitorMap[ip] = limiter
-//		}
-//		mu.Unlock()
-//		// 尝试获取令牌，如果没有可用的令牌则阻塞
-//		if !limiter.Allow() {
-//			c.AbortWithStatusJSON(http.StatusTooManyRequests, gin.H{"error": "too many requests"})
-//			return
-//		}
-//		c.Next()
-//	}
-//}
+func IPInterceptor() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		ip := c.ClientIP()
+		if ip == "" {
+			ip = c.Request.RemoteAddr
+		}
+		if util.ExistIn(ip, global.IpAccess) {
+			c.Next()
+		}
+		path := c.Request.URL.Path
+		//fmt.Println(ip, path)
+
+		// 组合出 key
+		key := fmt.Sprintf("request:%s:%s", ip, path)
+		//fmt.Print("key", key)
+		// 将请求次数 +1，并设置过期时间
+		err := global.AutoInc(key)
+
+		if err != nil {
+			// 记录日志
+			fmt.Println("incr error:", err)
+			c.AbortWithError(http.StatusInternalServerError, err)
+			return
+		}
+		if err = global.ExpireRedis(key, time.Hour); err != nil {
+			log.Printf("redis缓存失败：%s", err)
+			c.AbortWithError(http.StatusInternalServerError, err)
+			return
+		}
+
+		// 获取当前IP在 path 上的请求次数
+		accessTime := global.GetLimitRedis(key)
+
+		if err != nil {
+			// 记录日志
+			fmt.Println("get error:", err)
+			c.AbortWithStatus(http.StatusInternalServerError)
+			return
+		}
+		//ip一小时内访问路径超过次数限制，拒绝访问
+		if accessTime > 60 {
+			requestLimit := fmt.Sprintf("request:%s:%s", ip, path)
+			if err = global.RpushRedis(global.InterceptPrefix, requestLimit); err != nil {
+				c.AbortWithStatusJSON(http.StatusServiceUnavailable, err)
+				return
+			}
+			c.AbortWithStatusJSON(http.StatusTooManyRequests, gin.H{"error": "too many requests"})
+			return
+		}
+		mu.Lock()
+		_, ok := visitorMap[ip]
+		var limiter = rate.NewLimiter(1, 10) // 设置限制为1个请求/秒，最多允许10个并发请求
+		// 如果该IP地址不存在，则创建一个速率限制器
+		if !ok {
+			visitorMap[ip] = limiter
+		}
+		mu.Unlock()
+		// 尝试获取令牌，如果没有可用的令牌则阻塞
+		if !limiter.Allow() {
+			c.AbortWithStatusJSON(http.StatusTooManyRequests, gin.H{"error": "too many requests"})
+			return
+		}
+		c.Next()
+	}
+}

@@ -31,10 +31,10 @@ const (
 	ACCOUT_NOT_EXIST_ERROR           = "账号不存在"
 	ADD_ERROR                        = "添加错误"
 	NO_AUTHORIZATION                 = "token不能为空"
-
-	INSUFFICIENT_PERMISSION_ERROR = "权限不足"
-	METHOD_NOT_FILLED_ERROR       = "方法未填写"
-	INSET_USER_ERROR              = "写入用户错误"
+	MAKE_TOKEN_ERROR                 = "token生成错误"
+	INSUFFICIENT_PERMISSION_ERROR    = "权限不足"
+	METHOD_NOT_FILLED_ERROR          = "方法未填写"
+	INSET_USER_ERROR                 = "写入用户错误"
 
 	//上传接口返回值
 	FILE_TYPE_ERROR   = "文件类型错误"

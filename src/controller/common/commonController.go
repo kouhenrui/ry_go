@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"os"
 	"path/filepath"
 	"ry_go/src/dto/reqDto"
 	"ry_go/src/global"
@@ -12,6 +13,10 @@ import (
 	"ry_go/src/service/common"
 	util "ry_go/src/utils"
 	"strings"
+)
+
+var (
+	commonService common.CommonServiceInter = &common.CommonServiceImpl{}
 )
 
 /**
@@ -22,7 +27,7 @@ import (
  * @return
  **/
 func GetCaptcha(c *gin.Context) {
-	err, captera := common.GetCaptcha()
+	err, captera := commonService.GetCaptcha()
 	//fmt.Println("接获获取", captera)
 	if err != nil {
 		c.Error(err)
@@ -46,7 +51,7 @@ func VfCaptcha(c *gin.Context) {
 		c.AbortWithError(http.StatusBadRequest, util.GetValidate(err, &vf))
 		return
 	}
-	c.Set("res", common.VfCaptcha(vf))
+	c.Set("res", commonService.VfCaptcha(vf))
 	//return common.VfCaptcha(vf)
 }
 
@@ -116,4 +121,46 @@ func uploadVideo(c *gin.Context) {
 	//pa := path.Join("./"+global.VideoPath+"/", file.Filename)
 	c.SaveUploadedFile(file, filePath)
 	c.Set("res", filePath)
+}
+
+/**
+ * @Author Khr
+ * @Description //TODO 文件流下载
+ * @Date 16:50 2023/10/16
+ * @Param
+ * @return
+ **/
+func DownloadFile(c *gin.Context) {
+	fileName := c.Query("name")
+	// 文件路径
+	filePath := global.FilePath + "./" + fileName
+
+	// 打开文件
+	file, err := os.Open(filePath)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	defer file.Close()
+	// 获取文件信息
+	fileInfo, err := os.Stat(filePath)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	// 设置响应头，告诉浏览器这是一个文件下载
+	c.Header("Content-Disposition", "attachment; filename="+filePath)
+	c.Header("Content-Type", "application/octet-stream")
+	c.Header("Content-Length", string(fileSize(filePath)))
+
+	// 将文件内容写入响应主体
+	http.ServeContent(c.Writer, c.Request, filePath, fileInfo.ModTime(), file)
+
+}
+func fileSize(filename string) int64 {
+	file, err := os.Stat(filename)
+	if err != nil {
+		return 0
+	}
+	return file.Size()
 }

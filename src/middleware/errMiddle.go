@@ -26,12 +26,14 @@ func GlobalErrorMiddleware() gin.HandlerFunc {
 				// 打印错误堆栈信息
 				debug.PrintStack()
 				errorMessage := string(debug.Stack())
-				c.JSON(http.StatusInternalServerError, &comDto.ResponseData{
-					Code:    http.StatusInternalServerError,
-					Message: errorMessage,
-					Data:    nil,
-				})
-				return
+				fmt.Println("错误")
+				c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"message": errorMessage, "data": ""})
+				//c.JSON(http.StatusInternalServerError, &comDto.ResponseData{
+				//	Code:    http.StatusInternalServerError,
+				//	Message: errorMessage,
+				//	Data:    nil,
+				//})
+				//return
 				c.Abort()
 			}
 		}()

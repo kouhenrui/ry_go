@@ -11,12 +11,14 @@ import (
 	inter2 "ry_go/src/inter"
 	"ry_go/src/msg"
 	"ry_go/src/pojo"
+	"ry_go/src/service/common"
 	util "ry_go/src/utils"
 )
 
 var (
 	admin           *pojo.Admin
 	err             error
+	commonService   common.CommonServiceImpl
 	adminRepository inter2.AdminRepositoryInter = &inter2.AdminRepositoryImpl{}
 	roleRepository  inter2.RoleInter            = &inter2.RoleRepositoryImpl{}
 )
@@ -24,17 +26,22 @@ var (
 type AdminInter interface {
 	Login(body reqDto.AdminLogin, ip string) (resDto.TokenAndExp, error)
 	Register(body reqDto.AddAdmin) error
+	Info(id uint) (*resDto.AdminInfo, error)
 }
 type AdminService struct{}
 
-/**
- * @Author Khr
- * @Description //TODO 登录方法
- * @Date 17:33 2023/10/5
- * @Param
- * @return
- **/
+// TODO 登录方法
 func (i *AdminService) Login(body reqDto.AdminLogin, ip string) (t resDto.TokenAndExp, err error) {
+	//captcha := &reqDto.Captcha{
+	//	Id:      body.Uuid,
+	//	Content: body.Code,
+	//}
+	//if err = global.ExistRedis(captcha.Id); err == nil {
+	//	return t, errors.New(msg.CAPTCHA_ERROR)
+	//}
+	//if !commonService.VfCaptcha(*captcha) {
+	//	return t, errors.New(msg.CAPTCHA_CREATE_ERROR)
+	//}
 	//判定登陆方式
 	switch body.Method {
 	case "name":
@@ -58,52 +65,58 @@ func (i *AdminService) Login(body reqDto.AdminLogin, ip string) (t resDto.TokenA
 	}
 	//查询redis缓存是否存在
 	redisErr := global.ExistRedis(admin.AccessToken)
-
 	tokenDate := comDto.TokenClaims{
 		Id:       admin.ID,
 		Phone:    admin.Phone,
+		Name:     admin.UserName,
 		NickName: admin.NickName,
-		Role:     admin.Role,
+		Role:     admin.Roles,
 	}
 	//去除登录记录
 	if body.Revoke {
 		if len(admin.AccessToken) > 0 {
-			if redisErr != nil {
-				global.DelRedis(admin.AccessToken)
+			if redisErr == nil {
+				_ = global.DelRedis(admin.AccessToken)
 			}
-			if err = adminRepository.RemoveAccessToken(admin.ID); err != nil {
-				return t, err
-			}
+			err = adminRepository.RemoveAccessToken(admin.ID)
 		}
-		if t, err = i.tokenRedis(tokenDate, ip); err != nil {
-			return t, err
-		}
+		t, err = i.tokenRedis(tokenDate, ip)
 	} else {
-		if redisErr != nil {
-
-			if t, err = i.tokenRedis(tokenDate, ip); err != nil {
-				return t, err
+		if len(admin.AccessToken) > 0 {
+			if redisErr != nil {
+				t, err = i.tokenRedis(tokenDate, ip)
+			} else {
+				tokenValue := global.GetRedis(admin.AccessToken)
+				util.UnMarshal([]byte(tokenValue), &t)
 			}
 		} else {
-			tokenValue := global.GetRedis(admin.AccessToken)
-			util.UnMarshal([]byte(tokenValue), &t)
+			t, err = i.tokenRedis(tokenDate, ip)
 		}
 	}
 
-	//t, err = i.tokenRedis(tokenDate, ip)
-	//if err != nil {
-	//	return t, err
-	//}
 	return t, nil
 }
 
-/**
- * @Author Khr
- * @Description //TODO token生成，存入缓存
- * @Date 10:43 2023/10/6
- * @Param
- * @return
- **/
+// TODO info
+func (i *AdminService) Info(id uint) (*resDto.AdminInfo, error) {
+	var adminInfo *pojo.Admin
+	adminInfo, err = adminRepository.AdminInfo(id)
+	var info = &resDto.AdminInfo{
+		Id:       adminInfo.ID,
+		UserName: adminInfo.UserName,
+		NickName: adminInfo.NickName,
+		Phone:    adminInfo.Phone,
+		Sex:      adminInfo.Sex,
+		Avatar:   adminInfo.Avatar,
+		Email:    adminInfo.Email}
+	for _, i := range adminInfo.Roles {
+		r := i.Name
+		info.Role = append(info.Role, r)
+	}
+	return info, err
+}
+
+// TODO token生成，存入缓存
 func (i *AdminService) tokenRedis(tokenDate comDto.TokenClaims, ip string) (t resDto.TokenAndExp, err error) {
 	t = util.SignToken(tokenDate, global.AdminExp)
 	//生成access_token
@@ -119,13 +132,7 @@ func (i *AdminService) tokenRedis(tokenDate comDto.TokenClaims, ip string) (t re
 	return t, nil
 }
 
-/**
- * @Author Khr
- * @Description //TODO 添加数据
- * @Date 11:59 2023/10/6
- * @Param
- * @return
- **/
+// TODO 添加数据
 func (i *AdminService) Register(body reqDto.AddAdmin) error {
 	if len(body.UserName) < 0 && len(body.Phone) < 0 {
 		return errors.New(msg.ACCOUNT_PHONE_NOT_NULL)
@@ -168,7 +175,7 @@ func (i *AdminService) Register(body reqDto.AddAdmin) error {
 		Sex:      body.Sex,
 		Avatar:   body.Avatar,
 		Email:    body.Email,
-		Role:     roles,
+		Roles:    roles,
 	}
 	log.Println("打印要插入的数据", newAdmin)
 	return adminRepository.AddAdmin(newAdmin)

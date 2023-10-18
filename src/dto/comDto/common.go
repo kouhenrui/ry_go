@@ -13,6 +13,7 @@ import "ry_go/src/pojo"
 type TokenClaims struct {
 	Id       uint        `json:"id"`
 	Phone    string      `json:"phone"`
+	Name     string      `json:"name"`
 	NickName string      `json:"nick_name"`
 	Role     []pojo.Role `json:"role"`
 }

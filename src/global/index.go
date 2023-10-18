@@ -39,7 +39,7 @@ var (
 	EtcdClient      *clientv3.Client
 	JWTKEY          string
 	IpAccess        = []string{"127.0.0.1"}
-	WriteList       = []string{"/api/upload/file", "/api/captcha"}
+	WriteList       = []string{"/api/swagger/*", "/api/upload/file", "/api/captcha", "/api/auth/login", "/api/auth/register"}
 	EtcdArry        = []string{"192.168.245.22:2379"}
 	FilePath        string        //静态文件上传路径
 	VideoPath       string        //视频上传路径
@@ -107,7 +107,7 @@ func viperLoadConf() {
 	VideoPath = v.GetString("VideoPath")
 	JWTKEY = v.GetString("JWTKEY")
 	//登陆时长获取
-	AdminExp = time.Duration(v.GetInt("adminExp"))
+	AdminExp = time.Duration(v.GetInt("adminExp")*24) * time.Hour
 	UserExp = time.Duration(v.GetInt("userExp"))
 	//读取mysql,redis,rabbitmq,casbin
 	mysql := v.GetStringMap("mysql") //读取MySQL配置

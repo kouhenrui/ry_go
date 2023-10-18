@@ -1,11 +1,11 @@
 package reqDto
 
 type AdminLogin struct {
-	Phone    string `json:"phone" binding:"len=12"`
+	Phone    string `json:"phone" ` //binding:"len=12"
 	UserName string `json:"user_name"`
 	Password string `json:"password" binding:"required"`
-	Method   string `json:"method" binding:"oneof=user_name phone,required" `
-	Revoke   bool   `json:"revoke" binding:"required"`
+	Method   string `json:"method" binding:"oneof=name phone,required" `
+	Revoke   bool   `json:"revoke" ` //binding:"required"
 	Code     string `json:"code" binding:"required,len=6"`
 	Uuid     string `json:"uuid" binding:"required"`
 }

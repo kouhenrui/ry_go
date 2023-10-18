@@ -28,6 +28,7 @@ type AdminRepositoryInter interface {
 	RemoveAccessToken(id uint) error
 	UpdateToken(access_token string, id uint, ip string) error
 	AddAdmin(body pojo.Admin) error
+	AdminInfo(id uint) (*pojo.Admin, error)
 }
 
 // TODO 根据手机号查询
@@ -74,7 +75,7 @@ func (ap *AdminRepositoryImpl) CheckByNickName(nickName string) (*pojo.Admin, er
 // TODO 查询昵称
 func (ap *AdminRepositoryImpl) CheckByName(userName string) (*pojo.Admin, error) {
 	a.UserName = userName
-	err := db.First(a).Error
+	err := db.Preload("Roles").First(&a).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, nil
@@ -86,13 +87,13 @@ func (ap *AdminRepositoryImpl) CheckByName(userName string) (*pojo.Admin, error)
 }
 
 // TODO 详情数据
-func (ap *AdminRepositoryImpl) AdminInfo(id uint) (*resDto.AdminInfo, error) {
+func (ap *AdminRepositoryImpl) AdminInfo(id uint) (*pojo.Admin, error) {
 	a.ID = id
-	err := db.Model(a).Preload("Role").Find(resDto.AdminInfo{}).Error //.Select("inter.*,r.name as role_name").Joins("left join rule as r on r.id = inter.role").Scan(&adminInfo).Error
+	err := db.Preload("Roles").First(&a).Error
 	if err != nil {
 		return nil, err
 	}
-	return &resDto.AdminInfo{}, nil
+	return a, nil
 }
 
 // TODO 更新token数据
