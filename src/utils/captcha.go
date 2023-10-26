@@ -18,7 +18,7 @@ func NewCaptchaService() *CaptchaService {
 const (
 	CaptchaHeight          = 80  //高度
 	CaptchaWidth           = 240 //宽度
-	CaptchaLength          = 6   //长度
+	CaptchaLength          = 4   //长度
 	CaptchaNoiseCount      = 0   //干扰数
 	CaptcahShowLineOptions = 6   //展示个数
 	CaptcahSource          = "1234567890qwertyuioplkjhgfdsazxcvbnm"

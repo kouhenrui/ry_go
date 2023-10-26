@@ -2,6 +2,7 @@ package msg
 
 const (
 	//权限错误
+	COOKIE_NOT_EXIST_ERROR           = "请将cookie加入请求中"
 	NO_AUTH_ERROR                    = "请登录"
 	ACCOUNT_PWD_ERROR                = "账号密码错误"
 	SUCCESS                          = "成功"
@@ -35,18 +36,19 @@ const (
 	INSUFFICIENT_PERMISSION_ERROR    = "权限不足"
 	METHOD_NOT_FILLED_ERROR          = "方法未填写"
 	INSET_USER_ERROR                 = "写入用户错误"
-
+	TWO_PWD_MATCH_ERROR              = "验证与原密码不一致"
+	PWD_CHANGE_SUCCESS               = "密码修改成功"
 	//上传接口返回值
 	FILE_TYPE_ERROR   = "文件类型错误"
 	FILE_SUFFIX_ERROR = "文件后缀类型不符"
 	FILE_TOO_LARGE    = "上传文件太大"
-
+	FILE_SAVE_ERROR   = "文件保存错误"
 	//websocket错误
 
 	WEBSOCKET_CONNECT_ERROR = "websocket连接错误"
 
 	//权限错误
-	PERMISSION_NOT_FOUND_ERROR = "请求删除的权限未找到"
+	PERMISSION_NOT_FOUND_ERROR = "请求权限未找到"
 	PERMISSION_ADD_SUCCESS     = "权限写入成功"
 
 	AUTHENTICATION_FAILED = "身份验证未通过"
@@ -61,4 +63,7 @@ const (
 	//sql
 	ACCOUNT_PHONE_NOT_NULL = "账号未填写"
 	NOT_FOUND_ERROR        = "未找到匹配数据"
+
+	//公共方法
+	PARAM_ERROR = "参数类型错误"
 )

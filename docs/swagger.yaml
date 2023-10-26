@@ -1,0 +1,192 @@
+basePath: /api
+definitions:
+  comDto.ResponseData:
+    properties:
+      code:
+        type: integer
+      data: {}
+      message:
+        type: string
+    type: object
+  reqDto.AdminLogin:
+    properties:
+      code:
+        type: string
+      method:
+        enum:
+        - name
+        - phone
+        example: name
+        type: string
+      password:
+        type: string
+      phone:
+        description: binding:"len=12"
+        type: string
+      revoke:
+        description: binding:"required"
+        example: false
+        type: boolean
+      user_name:
+        type: string
+      uuid:
+        type: string
+    required:
+    - code
+    - method
+    - password
+    - uuid
+    type: object
+host: 127.0.0.1:9999
+info:
+  contact:
+    email: hengruikou@gmail.com
+    name: khr
+  description: This is a sample gin server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /auth/info:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/comDto.ResponseData'
+      summary: 详情接口
+      tags:
+      - account
+  /auth/login:
+    post:
+      parameters:
+      - description: 参数
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/reqDto.AdminLogin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/comDto.ResponseData'
+      summary: 登录接口
+      tags:
+      - account
+  /auth/logout:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: 登出接口
+      tags:
+      - account
+  /captcha:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/comDto.ResponseData'
+      summary: 获取验证码
+      tags:
+      - public
+  /download:
+    get:
+      produces:
+      - multipart/form-data
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/comDto.ResponseData'
+      summary: 文件流下载
+      tags:
+      - public
+  /upload/file:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: File to be uploaded
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - multipart/form-data
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/comDto.ResponseData'
+      summary: 上传单个文件
+      tags:
+      - public
+  /upload/files:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: File to be uploaded
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - multipart/form-data
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/comDto.ResponseData'
+      summary: 上传视频
+      tags:
+      - public
+  /uploads/files:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: File to be uploaded
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - multipart/form-data
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/comDto.ResponseData'
+      summary: 上传多个文件
+      tags:
+      - public
+schemes:
+- http
+- https
+swagger: "2.0"
+tags:
+- description: This is a test tag
+  externalDocs:
+    description: This is my blog site
+  name: TestTag1
+x-example-key:
+  key: value

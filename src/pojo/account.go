@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-type Admin struct {
+type Account struct {
 	gorm.Model
 	UserName    string    `json:"user_name" gorm:"not null ;comment:'账号'" `
 	NickName    string    `json:"nick_name" gorm:"comment:'昵称'"`
@@ -16,9 +16,10 @@ type Admin struct {
 	Sex         int       `json:"sex" gorm:"comment:'性别'"`
 	Avatar      string    `json:"avatar" gorm:"comment:'头像'"`
 	Email       string    `json:"email" gorm:"comment:'邮箱'"`
-	Roles       []Role    `gorm:"many2many:admin_roles;"`
+	Roles       []Role    `gorm:"many2many:account_roles;"`
 	LoginIp     string    `json:"login_ip" gorm:"comment:'登录ip';default:null"`
 	LoginAt     time.Time `json:"login_at" gorm:"default:null;comment:'登陆时间'"`
+	Class       string    `json:"class" gorm:"comment:'身份类别'"`
 }
 
 //type AdminRepositoryInter interface {
@@ -118,6 +119,6 @@ type Admin struct {
 //}
 //
 //// 增加用户
-//func (a *Admin) AddAdmin(admin Admin) error {
-//	return db.Create(&admin).Error
+//func (a *Admin) AddAdmin(account Admin) error {
+//	return db.Create(&account).Error
 //}

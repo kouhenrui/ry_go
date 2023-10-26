@@ -7,8 +7,10 @@ import (
 
 func Repositoryinit(db *gorm.DB) {
 	err := db.AutoMigrate(
-		&Admin{}, //管理员表
-		&Role{},  //角色表
+		&Account{},      //管理员表
+		&Role{},         //角色表
+		&OperationLog{}, //操作记录表
+		&App{},          //app记录表
 	)
 	if err != nil {
 		panic(err)

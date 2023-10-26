@@ -19,13 +19,11 @@ var (
 	commonService common.CommonServiceInter = &common.CommonServiceImpl{}
 )
 
-/**
- * @Author Khr
- * @Description //TODO 生成图片验证码
- * @Date 9:21 2023/9/27
- * @Param
- * @return
- **/
+// @Summary	获取验证码
+// @Produce	json
+// @Tags		public
+// @Success	200 {object} comDto.ResponseData
+// @Router		/captcha [get]
 func GetCaptcha(c *gin.Context) {
 	err, captera := commonService.GetCaptcha()
 	//fmt.Println("接获获取", captera)
@@ -55,21 +53,25 @@ func VfCaptcha(c *gin.Context) {
 	//return common.VfCaptcha(vf)
 }
 
-/*
-* @MethodName upload
-* @Description 上传单个图片,返回字符串
-* @Author khr
-* @Date 2023/5/8 11:02
- */
-
+// @Summary	上传单个文件
+// @Produce	mpfd
+// @Tags		public
+// @Accept multipart/form-data
+// @Produce json
+// @Param file formData file true "File to be uploaded"
+// @Success	200 {object} comDto.ResponseData
+// @Router		/upload/file [post]
 func UploadFile(c *gin.Context) {
 	//err := c.Request.ParseMultipartForm(10 << 20)
 	if err := c.Request.ParseMultipartForm(10 << 20); err != nil {
 		c.Error(err)
+		return
 	}
 	file, err := c.FormFile("file")
 	if err != nil {
 		c.Error(errors.New(msg.FILE_TYPE_ERROR))
+
+		return
 		//c.Error(errors.New(util.FILE_TYPE_ERROR))
 	}
 	filename := file.Filename
@@ -81,14 +83,80 @@ func UploadFile(c *gin.Context) {
 
 }
 
-/*
- * @MethodName uploadVideo
- * @Description 上传视频
- * @Author khr
- * @Date 2023/5/8 11:03
- */
+// @Summary	上传图片
+// @Produce	mpfd
+// @Tags		public
+// @Accept multipart/form-data
+// @Produce json
+// @Param file formData file true "File to be uploaded"
+// @Success	200 {object} comDto.ResponseData
+// @Router		/upload/pic [post]
+func UploadPic(c *gin.Context) {
+	//err := c.Request.ParseMultipartForm(10 << 20)
+	if err := c.Request.ParseMultipartForm(10 << 20); err != nil {
+		c.Error(err)
+		return
+	}
+	file, err := c.FormFile("file")
+	if err != nil {
+		c.Error(errors.New(msg.FILE_TYPE_ERROR))
 
-func uploadVideo(c *gin.Context) {
+		return
+		//c.Error(errors.New(util.FILE_TYPE_ERROR))
+	}
+	filename := file.Filename
+	newFileName := util.GenerateUniqueFileName(filename)
+	filePath := filepath.Join(global.FilePath, newFileName)
+
+	c.SaveUploadedFile(file, filePath)
+	c.Set("res", filePath)
+
+}
+
+// @Summary	上传多个文件
+// @Produce	mpfd
+// @Tags		public
+// @Accept multipart/form-data
+// @Produce json
+// @Param file formData file true "File to be uploaded"
+// @Success	200 {object} comDto.ResponseData
+// @Router		/uploads/files [post]
+func UploadFiles(c *gin.Context) {
+	if err := c.Request.ParseMultipartForm(10 << 20); err != nil {
+		c.Error(errors.New(msg.FILE_TOO_LARGE))
+	}
+	form, err := c.MultipartForm()
+	if err != nil {
+		c.Error(errors.New(msg.FILE_TYPE_ERROR))
+	}
+	var filePaths []string
+	// 获取所有图片
+	files := form.File["files"]
+	// 遍历所有图片
+	for _, file := range files {
+		filename := file.Filename
+		newFileName := util.GenerateUniqueFileName(filename)
+		filePath := filepath.Join(global.FilePath, newFileName)
+
+		filePaths = append(filePaths, filePath)
+		// 逐个存
+		if err = c.SaveUploadedFile(file, filePath); err != nil {
+			c.Error(errors.New(msg.FILE_SAVE_ERROR))
+		}
+	}
+	c.Set("res", filePaths)
+
+}
+
+// @Summary	上传视频
+// @Produce	mpfd
+// @Tags		public
+// @Accept multipart/form-data
+// @Produce json
+// @Param file formData file true "File to be uploaded"
+// @Success	200 {object} comDto.ResponseData
+// @Router		/upload/files [post]
+func UploadVideo(c *gin.Context) {
 	//if err := c.Request.ParseMultipartForm(10 << 100); err != nil {
 	//	c.Error(err)
 	//}
@@ -119,7 +187,10 @@ func uploadVideo(c *gin.Context) {
 	//	os.Mkdir(global.VideoPath, os.ModePerm)
 	//}
 	//pa := path.Join("./"+global.VideoPath+"/", file.Filename)
-	c.SaveUploadedFile(file, filePath)
+	err := c.SaveUploadedFile(file, filePath)
+	if err != nil {
+		return
+	}
 	c.Set("res", filePath)
 }
 
@@ -130,6 +201,12 @@ func uploadVideo(c *gin.Context) {
  * @Param
  * @return
  **/
+
+// @Summary	文件流下载
+// @Produce	mpfd
+// @Tags		public
+// @Success	200 {object} comDto.ResponseData
+// @Router		/download [get]
 func DownloadFile(c *gin.Context) {
 	fileName := c.Query("name")
 	// 文件路径

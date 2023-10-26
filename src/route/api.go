@@ -22,15 +22,20 @@ func InitApi(route *gin.Engine) {
 	{
 		api.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 		api.GET("/captcha", common.GetCaptcha)
-		api.POST("/verify/captcha", common.VfCaptcha)
+		//api.POST("/verify/captcha", common.VfCaptcha)
 		api.POST("/upload/file", common.UploadFile)
-		authModule := api.Group("/auth")
+		api.POST("/uploads/files", common.UploadFiles)
+		api.POST("/upload/video", common.UploadVideo)
+		api.GET("/download", common.DownloadFile)
 
+		authModule := api.Group("/auth")
 		{
 			authModule.POST("/login", admin.Login)
 			authModule.GET("/info", admin.Info)
 			authModule.POST("/register", admin.Register)
 			authModule.GET("/logout", admin.LogOut)
+			authModule.GET("/account/profile", admin.AccountProfile)
+			authModule.PUT("/restet/pwd/self", admin.ResetPwdBySelf)
 		}
 	}
 

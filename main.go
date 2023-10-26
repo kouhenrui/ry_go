@@ -3,8 +3,32 @@ package main
 import (
 	"fmt"
 	"ry_go/src/global"
+	_ "ry_go/src/global"
 	"ry_go/src/route"
 )
+
+// @title Swagger Example API
+// @version 1.0
+// @description This is a sample gin server.
+// @termsOfService
+
+// @contact.name khr
+// @contact.url
+// @contact.email hengruikou@gmail.com
+
+// @tag.name TestTag1
+// @tag.description	This is a test tag
+// @tag.docs.url
+// @tag.docs.description This is my blog site
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host 127.0.0.1:9999
+// @BasePath /api
+
+// @schemes http https
+// @x-example-key {"key": "value"}
 
 func main() {
 	r := route.InitRoute()

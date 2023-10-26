@@ -47,7 +47,7 @@ cabin:
   type: "mysql"
   username: "root"
   password: "123456"
-  host: "192.168.245.11"
+  host: "192.168.245.33"
   port: "3306"
   database: "cabin"
   exist: false

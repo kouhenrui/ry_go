@@ -7,18 +7,24 @@ import (
 	"ry_go/src/dto/reqDto"
 	"ry_go/src/dto/resDto"
 	"ry_go/src/msg"
-	"ry_go/src/service/admin"
+	"ry_go/src/service/account"
 	util "ry_go/src/utils"
 	"time"
 )
 
 var (
-	adminService admin.AdminInter = &admin.AdminService{}
+	adminService account.AccountInter = &account.AccountService{}
 	err          error
 )
 
+// @Summary	登录接口
+// @Produce	json
+// @Tags		account
+// @Param		request	body reqDto.AccountLogin true	"参数"
+// @Success	200 {object} comDto.ResponseData
+// @Router		/auth/login [post]
 func Login(c *gin.Context) {
-	var adminLogin reqDto.AdminLogin
+	var adminLogin reqDto.AccountLogin
 	if err = c.ShouldBindJSON(&adminLogin); err != nil {
 		c.AbortWithError(http.StatusBadRequest, util.GetValidate(err, &adminLogin))
 		return
@@ -27,17 +33,27 @@ func Login(c *gin.Context) {
 	t, err := adminService.Login(adminLogin, ip)
 	if err != nil {
 		c.Error(err)
+		return
 	}
 	// 将Token设置到Cookie中
-	c.SetCookie("token", t.Token, int(time.Hour*24*7), c.GetString("reqUrl"), ip, false, true)
+	cookieName := "token:" + adminLogin.UserName
+	fmt.Println(cookieName)
+	c.SetCookie(cookieName, t.Token, int(time.Hour*24), c.GetString("reqUrl"), ip, false, true)
 	c.Set("res", t)
+	return
 }
 
+// @Summary	登出接口
+// @Produce	json
+// @Tags		account
+// @Success	200 string ok
+// @Router		/auth/logout [get]
 func LogOut(c *gin.Context) {
 
-	c.SetCookie("token", "", -1, "/", "localhost", false, true)
+	//c.SetCookie("token", "", -1, "/", "localhost", false, true)
 	c.Set("res", "ok")
-	//var adminRegister reqDto.AddAdmin
+	return
+	//var adminRegister reqDto.AddAccount
 	//if err = c.ShouldBindJSON(&adminRegister); err != nil {
 	//	c.AbortWithError(http.StatusBadRequest, util.GetValidate(err, &adminRegister))
 	//	return
@@ -45,28 +61,62 @@ func LogOut(c *gin.Context) {
 
 }
 
+// @Summary	详情接口
+// @Produce	json
+// @Tags		account
+// @Success	200 {object} comDto.ResponseData
+// @Router		/auth/info [get]
 func Info(c *gin.Context) {
 	id := c.GetUint("user_id")
 	fmt.Println(id, "id")
-	var info = &resDto.AdminInfo{}
+	var info = &resDto.AccountInfo{}
 	info, err = adminService.Info(id)
 	if err != nil {
 		c.Error(err)
 		return
 	}
 	c.Set("res", info)
+	return
 }
 func Register(c *gin.Context) {
-	var addAdmin reqDto.AddAdmin
-	if err = c.ShouldBindJSON(&addAdmin); err != nil {
-		c.AbortWithError(http.StatusBadRequest, util.GetValidate(err, &addAdmin))
+	var addAccount reqDto.AddAccount
+	if err = c.ShouldBindJSON(&addAccount); err != nil {
+		c.AbortWithError(http.StatusBadRequest, util.GetValidate(err, &addAccount))
 		return
 	}
-	err = adminService.Register(addAdmin)
+	err = adminService.Register(addAccount)
 	if err != nil {
 		c.Error(err)
 		return
 	}
 	c.Set("res", msg.ADD_SUCCESS)
 
+}
+
+func AccountProfile(c *gin.Context) {
+	id := c.GetUint("user_id")
+	fmt.Println(id, "id")
+	var info = &resDto.AccountInfo{}
+	info, err = adminService.Info(id)
+	if err != nil {
+		c.Error(err)
+		return
+	}
+	c.Set("res", info)
+	return
+}
+
+func ResetPwdBySelf(c *gin.Context) {
+	var reset reqDto.UpdateAccount
+	if err = c.ShouldBindJSON(&reset); err != nil {
+		c.AbortWithError(http.StatusBadRequest, util.GetValidate(err, &reset))
+		return
+	}
+	err = adminService.ResetPwdBySelf(reset)
+	if err != nil {
+		c.Error(err)
+		return
+	}
+	c.Set("res", msg.PWD_CHANGE_SUCCESS)
+	return
 }

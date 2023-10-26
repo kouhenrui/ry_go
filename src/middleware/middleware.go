@@ -12,7 +12,9 @@ import (
 	"net/http"
 	"ry_go/src/dto/comDto"
 	"ry_go/src/global"
+	"ry_go/src/inter"
 	"ry_go/src/msg"
+	"ry_go/src/pojo"
 	util "ry_go/src/utils"
 	"strings"
 	"sync"
@@ -30,6 +32,8 @@ import (
 var (
 	requestCounts = make(map[string]int)
 	claims        comDto.TokenClaims
+
+	operationService = inter.OperateLogImpl{}
 )
 
 /*
@@ -76,9 +80,28 @@ func LoggerMiddleWare() gin.HandlerFunc {
 		clientIP := c.ClientIP()
 		method := c.Request.Method
 		url := c.Request.RequestURI
-		if util.ExistIn(url, global.WriteList) {
-			rbody = "uploads"
+
+		switch url {
+		case "/api/swagger/*":
+			rbody = "swage"
+			break
+		case "/api/upload/file":
+			rbody = "upload"
+			break
+		case "/api/captcha":
+			rbody = "captcha"
+
+			break
+		case "/api/auth/login":
+			rbody = "login"
+			break
+		case "/api/auth/register":
+			rbody = "register"
+
 		}
+		//if util.ExistIn(url, global.WriteList) {
+		//	rbody = "uploads"
+		//}
 		Log := global.Logger.WithFields(
 			logrus.Fields{
 				"SpendTime": spendTime,       //接口花费时间
@@ -91,6 +114,17 @@ func LoggerMiddleWare() gin.HandlerFunc {
 				"query":     query,           //请求query
 				"message":   c.Errors,        //返回错误信息
 			})
+		operationLog := &pojo.OperationLog{
+			UserID:    c.GetUint("user_id"),
+			UserName:  c.GetString("user_name"),
+			Way:       method,
+			Path:      url,
+			Details:   rbody,
+			IP:        c.GetString("ip"),
+			UserAgent: c.GetHeader("User-Agent"),
+		}
+		_ = operationService.AddLog(operationLog)
+
 		if len(c.Errors) > 0 { // 矿建内部错误
 			Log.Error(c.Errors.ByType(gin.ErrorTypePrivate))
 		}
@@ -119,8 +153,10 @@ func GolbalMiddleWare() gin.HandlerFunc {
 		c.Set("ip", ip)
 		requestUrl := c.Request.URL.String()
 		c.Set("reqUrl", requestUrl)
+		fmt.Println(requestUrl, "requestUrl")
 		//路径模糊匹配
 		if !util.FuzzyMatch(requestUrl, global.WriteList) {
+
 			//log.Println("不是公共访问路径")
 			//请求头是否携带token
 			existToken := c.GetHeader("Authorization")
@@ -143,9 +179,25 @@ func GolbalMiddleWare() gin.HandlerFunc {
 			c.Set("user_name", claims.Name)
 			c.Set("user_phone", claims.Phone)
 			c.Set("user_role", roles)
+			//if true {
+			//	cookieName := "token:" + claims.Name
+			//	fmt.Println(cookieName, "******************************")
+			//	w, err := c.Cookie(cookieName)
+			//
+			//	fmt.Println(w, "******************************")
+			//	if err != nil {
+			//		c.Error(errors.New(msg.COOKIE_NOT_EXIST_ERROR))
+			//		//c.Error(errors.New(msg.COOKIE_NOT_EXIST_ERROR))
+			//		return
+			//	}
+			//
+			//}
+
 			//c.Set("user", claims)
 		}
 		c.Next()
+
+		return
 		//ts := time.Since(t)
 		//fmt.Println("time", ts)
 		//fmt.Println("token认证执行结束")
@@ -308,5 +360,6 @@ func IPInterceptor() gin.HandlerFunc {
 			return
 		}
 		c.Next()
+		return
 	}
 }
