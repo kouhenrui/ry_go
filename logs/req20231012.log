@@ -1,0 +1,13 @@
+time="2023-10-12 09:45:12" level=info Ip="::1" Method=GET SpendTime="5 ms" body=uploads message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-12 09:45:28" level=error msg="Error #01: 404 Not Found\n" Ip="::1" Method=POST SpendTime="0 ms" body="{\"username\":\"admin\",\"password\":\"admin123\",\"code\":\"wnytv7\",\"uuid\":\"N0gzsKBG7KyJHb2JaDXm\"}" message="Error #01: 404 Not Found\n" path=/api/auth/login proto=HTTP/1.1 query= status=404
+time="2023-10-12 09:45:28" level=error Ip="::1" Method=POST SpendTime="0 ms" body="{\"username\":\"admin\",\"password\":\"admin123\",\"code\":\"wnytv7\",\"uuid\":\"N0gzsKBG7KyJHb2JaDXm\"}" message="Error #01: 404 Not Found\n" path=/api/auth/login proto=HTTP/1.1 query= status=404
+time="2023-10-12 09:45:28" level=info Ip="::1" Method=GET SpendTime="4 ms" body=uploads message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-12 10:36:05" level=info Ip="::1" Method=GET SpendTime="9 ms" body=uploads message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-12 10:36:14" level=info Ip="::1" Method=GET SpendTime="6 ms" body=uploads message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-12 10:37:16" level=info Ip="::1" Method=GET SpendTime="4 ms" body=uploads message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-12 10:38:10" level=info Ip="::1" Method=GET SpendTime="6 ms" body=uploads message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-12 10:38:26" level=info Ip="::1" Method=GET SpendTime="4 ms" body=uploads message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-12 15:03:20" level=error msg="Error #01: 404 Not Found\n" Ip="::1" Method=GET SpendTime="1 ms" body= message="Error #01: 404 Not Found\n" path=/api/system/user/getInfo proto=HTTP/1.1 query= status=404
+time="2023-10-12 15:03:20" level=error Ip="::1" Method=GET SpendTime="1 ms" body= message="Error #01: 404 Not Found\n" path=/api/system/user/getInfo proto=HTTP/1.1 query= status=404
+time="2023-10-12 15:03:20" level=error msg="Error #01: 404 Not Found\n" Ip="::1" Method=DELETE SpendTime="0 ms" body= message="Error #01: 404 Not Found\n" path=/api/auth/logout proto=HTTP/1.1 query= status=404
+time="2023-10-12 15:03:20" level=error Ip="::1" Method=DELETE SpendTime="0 ms" body= message="Error #01: 404 Not Found\n" path=/api/auth/logout proto=HTTP/1.1 query= status=404

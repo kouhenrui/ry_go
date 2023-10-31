@@ -1,0 +1,13 @@
+time="2023-10-20 09:14:42" level=error msg="Error #01: 请将cookie加入请求中\n" Ip=127.0.0.1 Method=GET SpendTime="466 ms" body= message="Error #01: 请将cookie加入请求中\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-20 09:14:42" level=info Ip=127.0.0.1 Method=GET SpendTime="466 ms" body= message="Error #01: 请将cookie加入请求中\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-20 09:33:44" level=info Ip=127.0.0.1 Method=POST SpendTime="45 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-20 09:35:01" level=info Ip=127.0.0.1 Method=POST SpendTime="16 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-20 09:38:06" level=info Ip=127.0.0.1 Method=POST SpendTime="14 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-20 09:52:26" level=info Ip=127.0.0.1 Method=POST SpendTime="13 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-20 09:53:16" level=info Ip=127.0.0.1 Method=POST SpendTime="40 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-20 10:04:25" level=info Ip=127.0.0.1 Method=POST SpendTime="13 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-20 10:08:42" level=error msg="Error #01: 请将cookie加入请求中\n" Ip=127.0.0.1 Method=GET SpendTime="14 ms" body= message="Error #01: 请将cookie加入请求中\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-20 10:08:42" level=info Ip=127.0.0.1 Method=GET SpendTime="14 ms" body= message="Error #01: 请将cookie加入请求中\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-20 10:10:52" level=error msg="Error #01: 请将cookie加入请求中\n" Ip=127.0.0.1 Method=GET SpendTime="12 ms" body= message="Error #01: 请将cookie加入请求中\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-20 10:10:52" level=info Ip=127.0.0.1 Method=GET SpendTime="12 ms" body= message="Error #01: 请将cookie加入请求中\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-20 10:11:21" level=info Ip=127.0.0.1 Method=GET SpendTime="12 ms" body= message= path=/api/auth/info proto=HTTP/1.1 query= status=200

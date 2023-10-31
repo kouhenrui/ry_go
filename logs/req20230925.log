@@ -1,0 +1,21 @@
+time="2023-09-25 15:49:17" level=error msg="Error #01: 404 Not Found\n" Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-25 15:49:17" level=error Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-25 15:49:18" level=error msg="Error #01: 404 Not Found\n" Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-25 15:49:18" level=error Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-25 15:50:35" level=error msg="Error #01: 404 Not Found\n" Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-25 15:50:35" level=error Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-25 15:51:52" level=error msg="Error #01: 404 Not Found\n" Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-25 15:51:52" level=error Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-25 15:51:53" level=error msg="Error #01: 404 Not Found\n" Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-25 15:51:53" level=error Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-25 15:53:03" level=error msg="Error #01: 404 Not Found\n" Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-25 15:53:03" level=error Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-25 15:54:18" level=error msg="Error #01: 404 Not Found\n" Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: 404 Not Found\n" path=/api/captchar proto=HTTP/1.1 query= status=404
+time="2023-09-25 15:54:18" level=error Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: 404 Not Found\n" path=/api/captchar proto=HTTP/1.1 query= status=404
+time="2023-09-25 15:55:39" level=error msg="Error #01: 404 Not Found\n" Ip=127.0.0.1 Method=POST SpendTime="0 ms" body="{\n  \"take\":10,\"skip\":0,\"key\":\"unit_number\",\"value\":\"0002\"\n\n}" message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-25 15:55:39" level=error Ip=127.0.0.1 Method=POST SpendTime="0 ms" body="{\n  \"take\":10,\"skip\":0,\"key\":\"unit_number\",\"value\":\"0002\"\n\n}" message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-25 15:59:08" level=error msg="Error #01: 404 Not Found\n" Ip=127.0.0.1 Method=POST SpendTime="0 ms" body="{\n  \"take\":10,\"skip\":0,\"key\":\"unit_number\",\"value\":\"0002\"\n\n}" message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-25 15:59:08" level=error Ip=127.0.0.1 Method=POST SpendTime="0 ms" body="{\n  \"take\":10,\"skip\":0,\"key\":\"unit_number\",\"value\":\"0002\"\n\n}" message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-25 16:01:45" level=error msg="Error #01: 404 Not Found\n" Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-25 16:01:45" level=error Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-25 16:25:18" level=info Ip=127.0.0.1 Method=GET SpendTime="8 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200

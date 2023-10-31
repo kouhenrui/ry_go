@@ -1,0 +1,38 @@
+time="2023-09-26 09:29:02" level=info Ip=127.0.0.1 Method=GET SpendTime="4 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 09:49:27" level=info Ip=127.0.0.1 Method=GET SpendTime="9 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 10:00:01" level=info Ip=127.0.0.1 Method=GET SpendTime="9 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 10:05:54" level=info Ip=127.0.0.1 Method=GET SpendTime="8 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 10:09:40" level=info Ip=127.0.0.1 Method=GET SpendTime="5 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 10:22:56" level=info Ip=127.0.0.1 Method=GET SpendTime="6 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 10:25:21" level=info Ip=127.0.0.1 Method=GET SpendTime="8 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 10:26:37" level=error msg="Error #01: err\n" Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: err\n" path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 10:26:37" level=info Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: err\n" path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 10:50:34" level=error msg="Error #01: err\n" Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: err\n" path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 10:50:34" level=info Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: err\n" path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 10:51:00" level=error msg="Error #01: 404 Not Found\n" Ip=127.0.0.1 Method=POST SpendTime="10 ms" body="{\n  \"take\":10,\"skip\":0,\"key\":\"unit_number\",\"value\":\"0002\"\n\n}" message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-26 10:51:00" level=error Ip=127.0.0.1 Method=POST SpendTime="10 ms" body="{\n  \"take\":10,\"skip\":0,\"key\":\"unit_number\",\"value\":\"0002\"\n\n}" message="Error #01: 404 Not Found\n" path=/api/captcha proto=HTTP/1.1 query= status=404
+time="2023-09-26 10:51:45" level=error msg="Error #01: err\n" Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: err\n" path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 10:51:45" level=info Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: err\n" path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 10:53:49" level=error Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=460
+time="2023-09-26 11:02:16" level=error msg="Error #01: 4444\n" Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: 4444\n" path=/api/captcha proto=HTTP/1.1 query= status=460
+time="2023-09-26 11:02:16" level=error Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: 4444\n" path=/api/captcha proto=HTTP/1.1 query= status=460
+time="2023-09-26 11:04:54" level=error msg="Error #01: err\n" Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: err\n" path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 11:04:54" level=info Ip=127.0.0.1 Method=GET SpendTime="0 ms" body= message="Error #01: err\n" path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 11:08:08" level=info Ip=127.0.0.1 Method=GET SpendTime="18 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 11:09:06" level=info Ip=127.0.0.1 Method=GET SpendTime="7 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 11:09:24" level=info Ip=127.0.0.1 Method=GET SpendTime="5 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 11:09:34" level=info Ip=127.0.0.1 Method=GET SpendTime="4 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 13:54:29" level=info Ip=127.0.0.1 Method=GET SpendTime="8 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 13:59:18" level=info Ip=127.0.0.1 Method=GET SpendTime="6 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 13:59:19" level=info Ip=127.0.0.1 Method=GET SpendTime="5 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 13:59:19" level=info Ip=127.0.0.1 Method=GET SpendTime="7 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 13:59:19" level=info Ip=127.0.0.1 Method=GET SpendTime="6 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 13:59:20" level=info Ip=127.0.0.1 Method=GET SpendTime="5 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 13:59:20" level=info Ip=127.0.0.1 Method=GET SpendTime="6 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 13:59:20" level=info Ip=127.0.0.1 Method=GET SpendTime="6 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 14:02:25" level=info Ip=127.0.0.1 Method=GET SpendTime="13 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 14:22:37" level=info Ip=127.0.0.1 Method=GET SpendTime="10 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 14:30:08" level=info Ip=127.0.0.1 Method=GET SpendTime="5 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 15:21:01" level=info Ip=127.0.0.1 Method=GET SpendTime="5 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 15:22:37" level=info Ip=127.0.0.1 Method=POST SpendTime="3 ms" body="{\n  \"id\":\"OV7YuvZVbb9qtdB9Q2y8\",\"content\":\"h5h083\"\n\n}" message= path=/api/verify/captcha proto=HTTP/1.1 query= status=200
+time="2023-09-26 17:28:25" level=info Ip=127.0.0.1 Method=GET SpendTime="4 ms" body= message= path=/api/captcha proto=HTTP/1.1 query= status=200

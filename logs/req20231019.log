@@ -1,0 +1,55 @@
+time="2023-10-19 09:48:58" level=info Ip=127.0.0.1 Method=GET SpendTime="3 ms" body= message= path=/api/swagger/index.html proto=HTTP/1.1 query= status=200
+time="2023-10-19 09:48:58" level=info Ip=127.0.0.1 Method=GET SpendTime="3 ms" body= message= path=/api/swagger/swagger-ui.css proto=HTTP/1.1 query= status=200
+time="2023-10-19 09:48:58" level=info Ip=127.0.0.1 Method=GET SpendTime="3 ms" body= message= path=/api/swagger/swagger-ui-standalone-preset.js proto=HTTP/1.1 query= status=200
+time="2023-10-19 09:48:58" level=info Ip=127.0.0.1 Method=GET SpendTime="10 ms" body= message= path=/api/swagger/swagger-ui-bundle.js proto=HTTP/1.1 query= status=200
+time="2023-10-19 09:48:58" level=info Ip=127.0.0.1 Method=GET SpendTime="2 ms" body= message= path=/api/swagger/favicon-32x32.png proto=HTTP/1.1 query= status=200
+time="2023-10-19 09:48:58" level=info Ip=127.0.0.1 Method=GET SpendTime="3 ms" body= message= path=/api/swagger/doc.json proto=HTTP/1.1 query= status=200
+time="2023-10-19 13:55:23" level=info Ip=127.0.0.1 Method=GET SpendTime="9 ms" body= message= path=/api/swagger/index.html proto=HTTP/1.1 query= status=200
+time="2023-10-19 13:55:23" level=info Ip=127.0.0.1 Method=GET SpendTime="12 ms" body= message= path=/api/swagger/swagger-ui.css proto=HTTP/1.1 query= status=200
+time="2023-10-19 13:55:23" level=info Ip=127.0.0.1 Method=GET SpendTime="15 ms" body= message= path=/api/swagger/swagger-ui-standalone-preset.js proto=HTTP/1.1 query= status=200
+time="2023-10-19 13:55:23" level=info Ip=127.0.0.1 Method=GET SpendTime="10 ms" body= message= path=/api/swagger/swagger-ui-bundle.js proto=HTTP/1.1 query= status=200
+time="2023-10-19 13:55:24" level=info Ip=127.0.0.1 Method=GET SpendTime="3 ms" body= message= path=/api/swagger/favicon-32x32.png proto=HTTP/1.1 query= status=200
+time="2023-10-19 13:55:24" level=info Ip=127.0.0.1 Method=GET SpendTime="7 ms" body= message= path=/api/swagger/doc.json proto=HTTP/1.1 query= status=200
+time="2023-10-19 13:55:51" level=info Ip=127.0.0.1 Method=GET SpendTime="12 ms" body=uploads message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:07:03" level=info Ip=127.0.0.1 Method=GET SpendTime="3 ms" body= message= path=/api/swagger/index.html proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:07:03" level=info Ip=127.0.0.1 Method=GET SpendTime="3 ms" body= message= path=/api/swagger/swagger-ui.css proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:07:03" level=info Ip=127.0.0.1 Method=GET SpendTime="4 ms" body= message= path=/api/swagger/swagger-ui-standalone-preset.js proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:07:03" level=info Ip=127.0.0.1 Method=GET SpendTime="10 ms" body= message= path=/api/swagger/swagger-ui-bundle.js proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:07:03" level=info Ip=127.0.0.1 Method=GET SpendTime="6 ms" body= message= path=/api/swagger/doc.json proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:07:03" level=info Ip=127.0.0.1 Method=GET SpendTime="6 ms" body= message= path=/api/swagger/favicon-32x32.png proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:15:31" level=info Ip=127.0.0.1 Method=GET SpendTime="3 ms" body= message= path=/api/swagger/index.html proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:15:31" level=info Ip=127.0.0.1 Method=GET SpendTime="7 ms" body= message= path=/api/swagger/swagger-ui.css proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:15:31" level=info Ip=127.0.0.1 Method=GET SpendTime="3 ms" body= message= path=/api/swagger/swagger-ui-standalone-preset.js proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:15:31" level=info Ip=127.0.0.1 Method=GET SpendTime="9 ms" body= message= path=/api/swagger/swagger-ui-bundle.js proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:15:31" level=info Ip=127.0.0.1 Method=GET SpendTime="8 ms" body= message= path=/api/swagger/favicon-32x32.png proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:15:31" level=info Ip=127.0.0.1 Method=GET SpendTime="5 ms" body= message= path=/api/swagger/doc.json proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:15:56" level=info Ip=127.0.0.1 Method=GET SpendTime="3 ms" body= message= path=/api/swagger/index.html proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:15:56" level=error Ip=127.0.0.1 Method=GET SpendTime="6 ms" body= message= path=/api/swagger/swagger-ui.css proto=HTTP/1.1 query= status=304
+time="2023-10-19 14:15:56" level=error Ip=127.0.0.1 Method=GET SpendTime="4 ms" body= message= path=/api/swagger/swagger-ui-bundle.js proto=HTTP/1.1 query= status=304
+time="2023-10-19 14:15:56" level=error Ip=127.0.0.1 Method=GET SpendTime="4 ms" body= message= path=/api/swagger/swagger-ui-standalone-preset.js proto=HTTP/1.1 query= status=304
+time="2023-10-19 14:15:56" level=info Ip=127.0.0.1 Method=GET SpendTime="3 ms" body= message= path=/api/swagger/doc.json proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:15:56" level=error Ip=127.0.0.1 Method=GET SpendTime="3 ms" body= message= path=/api/swagger/favicon-32x32.png proto=HTTP/1.1 query= status=304
+time="2023-10-19 14:18:00" level=info Ip=127.0.0.1 Method=GET SpendTime="2 ms" body= message= path=/api/swagger/index.html proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:18:00" level=info Ip=127.0.0.1 Method=GET SpendTime="3 ms" body= message= path=/api/swagger/swagger-ui.css proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:18:00" level=info Ip=127.0.0.1 Method=GET SpendTime="2 ms" body= message= path=/api/swagger/swagger-ui-standalone-preset.js proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:18:00" level=info Ip=127.0.0.1 Method=GET SpendTime="9 ms" body= message= path=/api/swagger/swagger-ui-bundle.js proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:18:01" level=info Ip=127.0.0.1 Method=GET SpendTime="2 ms" body= message= path=/api/swagger/doc.json proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:18:01" level=info Ip=127.0.0.1 Method=GET SpendTime="2 ms" body= message= path=/api/swagger/favicon-32x32.png proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:34:51" level=info Ip=127.0.0.1 Method=GET SpendTime="2 ms" body= message= path=/api/swagger/index.html proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:34:51" level=info Ip=127.0.0.1 Method=GET SpendTime="4 ms" body= message= path=/api/swagger/swagger-ui.css proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:34:51" level=info Ip=127.0.0.1 Method=GET SpendTime="6 ms" body= message= path=/api/swagger/swagger-ui-standalone-preset.js proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:34:51" level=info Ip=127.0.0.1 Method=GET SpendTime="12 ms" body= message= path=/api/swagger/swagger-ui-bundle.js proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:34:51" level=info Ip=127.0.0.1 Method=GET SpendTime="3 ms" body= message= path=/api/swagger/favicon-32x32.png proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:34:51" level=info Ip=127.0.0.1 Method=GET SpendTime="4 ms" body= message= path=/api/swagger/doc.json proto=HTTP/1.1 query= status=200
+time="2023-10-19 14:35:06" level=info Ip=127.0.0.1 Method=POST SpendTime="55 ms" body=uploads message= path=/api/upload/file proto=HTTP/1.1 query= status=200
+time="2023-10-19 16:18:49" level=error msg="Error #01: cookie不存在\n" Ip=127.0.0.1 Method=GET SpendTime="16 ms" body= message="Error #01: cookie不存在\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-19 16:18:49" level=info Ip=127.0.0.1 Method=GET SpendTime="16 ms" body= message="Error #01: cookie不存在\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-19 16:19:48" level=info Ip=127.0.0.1 Method=GET SpendTime="12 ms" body= message= path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-19 16:30:30" level=error msg="Error #01: 请将cookie加入请求中\n" Ip=127.0.0.1 Method=GET SpendTime="12 ms" body= message="Error #01: 请将cookie加入请求中\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-19 16:30:30" level=info Ip=127.0.0.1 Method=GET SpendTime="12 ms" body= message="Error #01: 请将cookie加入请求中\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-19 16:31:32" level=error msg="Error #01: 请将cookie加入请求中\n" Ip=127.0.0.1 Method=GET SpendTime="12 ms" body= message="Error #01: 请将cookie加入请求中\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-19 16:31:32" level=info Ip=127.0.0.1 Method=GET SpendTime="12 ms" body= message="Error #01: 请将cookie加入请求中\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-19 16:52:39" level=error msg="Error #01: 请将cookie加入请求中\n" Ip=127.0.0.1 Method=GET SpendTime="14 ms" body= message="Error #01: 请将cookie加入请求中\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-19 16:52:39" level=info Ip=127.0.0.1 Method=GET SpendTime="14 ms" body= message="Error #01: 请将cookie加入请求中\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-19 16:54:30" level=error msg="Error #01: 请将cookie加入请求中\n" Ip=127.0.0.1 Method=GET SpendTime="14 ms" body= message="Error #01: 请将cookie加入请求中\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-19 16:54:30" level=info Ip=127.0.0.1 Method=GET SpendTime="14 ms" body= message="Error #01: 请将cookie加入请求中\n" path=/api/auth/info proto=HTTP/1.1 query= status=200

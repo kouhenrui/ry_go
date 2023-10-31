@@ -1,0 +1,77 @@
+time="2023-10-17 09:24:19" level=error msg="Error #01: invalid character '\"' after object key:value pair\n" Ip=127.0.0.1 Method=POST SpendTime="10 ms" body=uploads message="Error #01: invalid character '\"' after object key:value pair\n" path=/api/auth/login proto=HTTP/1.1 query= status=400
+time="2023-10-17 09:24:19" level=error Ip=127.0.0.1 Method=POST SpendTime="10 ms" body=uploads message="Error #01: invalid character '\"' after object key:value pair\n" path=/api/auth/login proto=HTTP/1.1 query= status=400
+time="2023-10-17 09:47:52" level=info Ip=127.0.0.1 Method=GET SpendTime="8 ms" body=uploads message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-17 09:49:54" level=info Ip=127.0.0.1 Method=GET SpendTime="6 ms" body=uploads message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-17 09:57:23" level=info Ip=127.0.0.1 Method=GET SpendTime="10 ms" body=uploads message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:03:49" level=info Ip=127.0.0.1 Method=GET SpendTime="9 ms" body=uploads message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:04:30" level=error msg="Error #01: Key: 'AdminLogin.Phone' Error:Field validation for 'Phone' failed on the 'len' tag\nKey: 'AdminLogin.Revoke' Error:Field validation for 'Revoke' failed on the 'required' tag\n" Ip=127.0.0.1 Method=POST SpendTime="3 ms" body=uploads message="Error #01: Key: 'AdminLogin.Phone' Error:Field validation for 'Phone' failed on the 'len' tag\nKey: 'AdminLogin.Revoke' Error:Field validation for 'Revoke' failed on the 'required' tag\n" path=/api/auth/login proto=HTTP/1.1 query= status=400
+time="2023-10-17 10:04:30" level=error Ip=127.0.0.1 Method=POST SpendTime="3 ms" body=uploads message="Error #01: Key: 'AdminLogin.Phone' Error:Field validation for 'Phone' failed on the 'len' tag\nKey: 'AdminLogin.Revoke' Error:Field validation for 'Revoke' failed on the 'required' tag\n" path=/api/auth/login proto=HTTP/1.1 query= status=400
+time="2023-10-17 10:05:00" level=error msg="Error #01: Key: 'AdminLogin.Revoke' Error:Field validation for 'Revoke' failed on the 'required' tag\n" Ip=127.0.0.1 Method=POST SpendTime="3 ms" body=uploads message="Error #01: Key: 'AdminLogin.Revoke' Error:Field validation for 'Revoke' failed on the 'required' tag\n" path=/api/auth/login proto=HTTP/1.1 query= status=400
+time="2023-10-17 10:05:00" level=error Ip=127.0.0.1 Method=POST SpendTime="3 ms" body=uploads message="Error #01: Key: 'AdminLogin.Revoke' Error:Field validation for 'Revoke' failed on the 'required' tag\n" path=/api/auth/login proto=HTTP/1.1 query= status=400
+time="2023-10-17 10:07:24" level=error msg="Error #01: 登陆错误\n" Ip=127.0.0.1 Method=POST SpendTime="3 ms" body=uploads message="Error #01: 登陆错误\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:07:24" level=info Ip=127.0.0.1 Method=POST SpendTime="3 ms" body=uploads message="Error #01: 登陆错误\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:08:23" level=error msg="Error #01: Key: 'AdminLogin.Method' Error:Field validation for 'Method' failed on the 'oneof' tag\n" Ip=127.0.0.1 Method=POST SpendTime="2 ms" body=uploads message="Error #01: Key: 'AdminLogin.Method' Error:Field validation for 'Method' failed on the 'oneof' tag\n" path=/api/auth/login proto=HTTP/1.1 query= status=400
+time="2023-10-17 10:08:23" level=error Ip=127.0.0.1 Method=POST SpendTime="2 ms" body=uploads message="Error #01: Key: 'AdminLogin.Method' Error:Field validation for 'Method' failed on the 'oneof' tag\n" path=/api/auth/login proto=HTTP/1.1 query= status=400
+time="2023-10-17 10:09:03" level=info Ip=127.0.0.1 Method=POST SpendTime="12 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:17:24" level=info Ip=127.0.0.1 Method=GET SpendTime="6 ms" body=uploads message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:17:47" level=info Ip=127.0.0.1 Method=POST SpendTime="7 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:18:28" level=error msg="Error #01: 图片验证码生成错误\n" Ip=127.0.0.1 Method=POST SpendTime="5 ms" body=uploads message="Error #01: 图片验证码生成错误\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:18:28" level=info Ip=127.0.0.1 Method=POST SpendTime="5 ms" body=uploads message="Error #01: 图片验证码生成错误\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:18:39" level=error msg="Error #01: 图片验证码生成错误\n" Ip=127.0.0.1 Method=POST SpendTime="5 ms" body=uploads message="Error #01: 图片验证码生成错误\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:18:39" level=info Ip=127.0.0.1 Method=POST SpendTime="5 ms" body=uploads message="Error #01: 图片验证码生成错误\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:18:40" level=error msg="Error #01: 图片验证码生成错误\n" Ip=127.0.0.1 Method=POST SpendTime="6 ms" body=uploads message="Error #01: 图片验证码生成错误\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:18:40" level=info Ip=127.0.0.1 Method=POST SpendTime="6 ms" body=uploads message="Error #01: 图片验证码生成错误\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:18:41" level=error msg="Error #01: 图片验证码生成错误\n" Ip=127.0.0.1 Method=POST SpendTime="6 ms" body=uploads message="Error #01: 图片验证码生成错误\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:18:41" level=info Ip=127.0.0.1 Method=POST SpendTime="6 ms" body=uploads message="Error #01: 图片验证码生成错误\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:18:49" level=error msg="Error #01: 图片验证码生成错误\n" Ip=127.0.0.1 Method=POST SpendTime="5 ms" body=uploads message="Error #01: 图片验证码生成错误\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:18:49" level=info Ip=127.0.0.1 Method=POST SpendTime="5 ms" body=uploads message="Error #01: 图片验证码生成错误\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:19:44" level=error msg="Error #01: 图片验证码生成错误\n" Ip=127.0.0.1 Method=POST SpendTime="5 ms" body=uploads message="Error #01: 图片验证码生成错误\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:19:44" level=info Ip=127.0.0.1 Method=POST SpendTime="5 ms" body=uploads message="Error #01: 图片验证码生成错误\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:20:41" level=error msg="Error #01: 图片验证码已过期\n" Ip=127.0.0.1 Method=POST SpendTime="5 ms" body=uploads message="Error #01: 图片验证码已过期\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 10:20:41" level=info Ip=127.0.0.1 Method=POST SpendTime="5 ms" body=uploads message="Error #01: 图片验证码已过期\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 14:17:09" level=info Ip=127.0.0.1 Method=POST SpendTime="8 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 14:19:48" level=info Ip=127.0.0.1 Method=POST SpendTime="7 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 14:20:20" level=info Ip=127.0.0.1 Method=POST SpendTime="10 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 14:20:58" level=info Ip=127.0.0.1 Method=POST SpendTime="7 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 14:23:21" level=info Ip=127.0.0.1 Method=POST SpendTime="142 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 14:25:15" level=info Ip=127.0.0.1 Method=POST SpendTime="20 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 14:25:56" level=info Ip=127.0.0.1 Method=POST SpendTime="20 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 14:44:02" level=info Ip=127.0.0.1 Method=POST SpendTime="14 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 14:44:41" level=info Ip=127.0.0.1 Method=POST SpendTime="19 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 14:47:41" level=info Ip=127.0.0.1 Method=POST SpendTime="19 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 14:49:26" level=info Ip=127.0.0.1 Method=POST SpendTime="17 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 14:49:46" level=info Ip=127.0.0.1 Method=POST SpendTime="39 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 14:50:27" level=info Ip=127.0.0.1 Method=POST SpendTime="15 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:08:30" level=error msg="Error #01: 图片验证码已过期\n" Ip=127.0.0.1 Method=POST SpendTime="4 ms" body=uploads message="Error #01: 图片验证码已过期\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:08:30" level=info Ip=127.0.0.1 Method=POST SpendTime="4 ms" body=uploads message="Error #01: 图片验证码已过期\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:09:09" level=info Ip=127.0.0.1 Method=POST SpendTime="31 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:14:59" level=error msg="Error #01: 图片验证码已过期\n" Ip=127.0.0.1 Method=POST SpendTime="3 ms" body=uploads message="Error #01: 图片验证码已过期\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:14:59" level=info Ip=127.0.0.1 Method=POST SpendTime="3 ms" body=uploads message="Error #01: 图片验证码已过期\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:15:04" level=info Ip=127.0.0.1 Method=GET SpendTime="6 ms" body=uploads message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:15:28" level=error msg="Error #01: 图片验证码已过期\n" Ip=127.0.0.1 Method=POST SpendTime="4 ms" body=uploads message="Error #01: 图片验证码已过期\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:15:28" level=info Ip=127.0.0.1 Method=POST SpendTime="4 ms" body=uploads message="Error #01: 图片验证码已过期\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:15:30" level=error msg="Error #01: 图片验证码已过期\n" Ip=127.0.0.1 Method=POST SpendTime="3 ms" body=uploads message="Error #01: 图片验证码已过期\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:15:30" level=info Ip=127.0.0.1 Method=POST SpendTime="3 ms" body=uploads message="Error #01: 图片验证码已过期\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:15:33" level=error msg="Error #01: 图片验证码已过期\n" Ip=127.0.0.1 Method=POST SpendTime="4 ms" body=uploads message="Error #01: 图片验证码已过期\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:15:33" level=info Ip=127.0.0.1 Method=POST SpendTime="4 ms" body=uploads message="Error #01: 图片验证码已过期\n" path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:18:24" level=info Ip=127.0.0.1 Method=POST SpendTime="18 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:20:11" level=info Ip=127.0.0.1 Method=POST SpendTime="22 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:20:58" level=info Ip=127.0.0.1 Method=POST SpendTime="23 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:22:19" level=info Ip=127.0.0.1 Method=POST SpendTime="24 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:35:50" level=info Ip=127.0.0.1 Method=POST SpendTime="27 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:37:04" level=info Ip=127.0.0.1 Method=POST SpendTime="27 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:39:09" level=info Ip=127.0.0.1 Method=POST SpendTime="29 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:46:32" level=info Ip=127.0.0.1 Method=POST SpendTime="44 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:48:33" level=info Ip=127.0.0.1 Method=POST SpendTime="40 ms" body=uploads message= path=/api/auth/login proto=HTTP/1.1 query= status=200
+time="2023-10-17 16:55:34" level=error Ip=127.0.0.1 Method=GET SpendTime="4 ms" body= message= path=/api/info proto=HTTP/1.1 query= status=404
+time="2023-10-17 17:09:46" level=error Ip=127.0.0.1 Method=GET SpendTime="2 ms" body= message= path=/api/info proto=HTTP/1.1 query= status=404
+time="2023-10-17 17:13:44" level=error Ip=127.0.0.1 Method=GET SpendTime="3 ms" body= message= path=/api/info proto=HTTP/1.1 query= status=404
+time="2023-10-17 17:14:45" level=error Ip=127.0.0.1 Method=GET SpendTime="2 ms" body= message= path=/api/info proto=HTTP/1.1 query= status=404
+time="2023-10-17 17:15:30" level=error Ip=127.0.0.1 Method=GET SpendTime="3 ms" body= message= path=/api/info proto=HTTP/1.1 query= status=404
+time="2023-10-17 17:22:20" level=error msg="Error #01: Error 1054 (42S22): Unknown column 'admin.name' in 'field list'\n" Ip=127.0.0.1 Method=GET SpendTime="4 ms" body= message="Error #01: Error 1054 (42S22): Unknown column 'admin.name' in 'field list'\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-17 17:22:20" level=info Ip=127.0.0.1 Method=GET SpendTime="4 ms" body= message="Error #01: Error 1054 (42S22): Unknown column 'admin.name' in 'field list'\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-17 17:25:15" level=error msg="Error #01: Error 1054 (42S22): Unknown column 'admin.name' in 'field list'\n" Ip=127.0.0.1 Method=GET SpendTime="4 ms" body= message="Error #01: Error 1054 (42S22): Unknown column 'admin.name' in 'field list'\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-17 17:25:15" level=info Ip=127.0.0.1 Method=GET SpendTime="4 ms" body= message="Error #01: Error 1054 (42S22): Unknown column 'admin.name' in 'field list'\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-17 17:26:13" level=error msg="Error #01: Error 1054 (42S22): Unknown column 'admin.account' in 'field list'\n" Ip=127.0.0.1 Method=GET SpendTime="6 ms" body= message="Error #01: Error 1054 (42S22): Unknown column 'admin.account' in 'field list'\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-17 17:26:13" level=info Ip=127.0.0.1 Method=GET SpendTime="6 ms" body= message="Error #01: Error 1054 (42S22): Unknown column 'admin.account' in 'field list'\n" path=/api/auth/info proto=HTTP/1.1 query= status=200
+time="2023-10-17 17:27:00" level=info Ip=127.0.0.1 Method=GET SpendTime="5 ms" body= message= path=/api/auth/info proto=HTTP/1.1 query= status=200

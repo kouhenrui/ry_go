@@ -1,0 +1,28 @@
+time="2023-10-23 09:40:43" level=info Ip=127.0.0.1 Method=GET SpendTime="15 ms" body= message= path=/api/swagger/index.html proto=HTTP/1.1 query= status=200
+time="2023-10-23 09:41:00" level=info Ip=127.0.0.1 Method=GET SpendTime="5 ms" body= message= path=/api/swagger/index.html proto=HTTP/1.1 query= status=200
+time="2023-10-23 09:50:24" level=info Ip=127.0.0.1 Method=POST SpendTime="11 ms" body=uploads message= path=/api/upload/file proto=HTTP/1.1 query= status=200
+time="2023-10-23 09:56:37" level=info Ip=127.0.0.1 Method=POST SpendTime="5 ms" body=upload message= path=/api/upload/file proto=HTTP/1.1 query= status=200
+time="2023-10-23 10:23:57" level=info Ip=127.0.0.1 Method=POST SpendTime="7 ms" body=upload message= path=/api/upload/file proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:10:38" level=error Ip=127.0.0.1 Method=GET SpendTime="66 ms" body= message= path=/api/captchaImage proto=HTTP/1.1 query= status=404
+time="2023-10-23 17:10:39" level=error Ip=127.0.0.1 Method=GET SpendTime="12 ms" body= message= path=/api/captchaImage proto=HTTP/1.1 query= status=404
+time="2023-10-23 17:11:19" level=info Ip=127.0.0.1 Method=GET SpendTime="17 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:11:19" level=info Ip=127.0.0.1 Method=GET SpendTime="11 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:11:36" level=info Ip=127.0.0.1 Method=GET SpendTime="8 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:11:36" level=info Ip=127.0.0.1 Method=GET SpendTime="14 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:11:54" level=info Ip=127.0.0.1 Method=GET SpendTime="9 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:11:54" level=info Ip=127.0.0.1 Method=GET SpendTime="13 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:11:57" level=info Ip=127.0.0.1 Method=GET SpendTime="8 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:11:57" level=info Ip=127.0.0.1 Method=GET SpendTime="9 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:13:28" level=info Ip=127.0.0.1 Method=GET SpendTime="6 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:13:28" level=info Ip=127.0.0.1 Method=GET SpendTime="10 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:15:15" level=info Ip=127.0.0.1 Method=GET SpendTime="5 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:15:15" level=info Ip=127.0.0.1 Method=GET SpendTime="11 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:15:23" level=info Ip=127.0.0.1 Method=GET SpendTime="6 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:17:57" level=info Ip=127.0.0.1 Method=GET SpendTime="6 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:17:57" level=info Ip=127.0.0.1 Method=GET SpendTime="21 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:18:07" level=info Ip=127.0.0.1 Method=GET SpendTime="7 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:21:47" level=info Ip=127.0.0.1 Method=GET SpendTime="6 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:21:47" level=info Ip=127.0.0.1 Method=GET SpendTime="9 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
+time="2023-10-23 17:21:57" level=error msg="Error #01: Key: 'AdminLogin.Method' Error:Field validation for 'Method' failed on the 'oneof' tag\n" Ip=127.0.0.1 Method=POST SpendTime="2 ms" body=login message="Error #01: Key: 'AdminLogin.Method' Error:Field validation for 'Method' failed on the 'oneof' tag\n" path=/api/auth/login proto=HTTP/1.1 query= status=400
+time="2023-10-23 17:21:57" level=error Ip=127.0.0.1 Method=POST SpendTime="2 ms" body=login message="Error #01: Key: 'AdminLogin.Method' Error:Field validation for 'Method' failed on the 'oneof' tag\n" path=/api/auth/login proto=HTTP/1.1 query= status=400
+time="2023-10-23 17:21:57" level=info Ip=127.0.0.1 Method=GET SpendTime="10 ms" body=captcha message= path=/api/captcha proto=HTTP/1.1 query= status=200
